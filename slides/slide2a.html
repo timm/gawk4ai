@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First, how weak is the guess?</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  body { --code: 13px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .legend { display: flex; gap: 26px; margin: 2px 0 14px; font-size: 16px; color: #3c4043; }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .dot.all  { background: #1559b3; opacity: .55; }
+  .dot.pick { background: #cc7000; box-shadow: 0 0 0 2px #fff; }
+  table { font-size: 19px; }
+  td { padding: 6px 10px; }
+  .lede { font-size: 21px; margin: 0 0 16px; }
+  .lede b { font-weight: 700; }
+</style>
+</head>
+<body class="cols-2">
+
+<h1>2. Few labels? First, how weak is the guess?</h1>
+<p class="sub">label 25 rows, let knnr predict d2h for the rest &mdash; then score those predictions three ways</p>
+
+<div class="grid">
+  <section>
+    <div class="legend">
+      <span><i class="dot all"></i> every test row</span>
+      <span><i class="dot pick"></i> the 5 rows with the best predictions</span>
+    </div>
+    <div class="panels">
+      <div data-raw="slides/fig/weak-X264_AllMeasurements.svg"></div>
+      <div data-raw="slides/fig/weak-Wine_quality.svg"></div>
+    </div>
+    <p class="note">one shuffle (seed 1). A good predictor would sit on the dashed line.</p>
+  </section>
+
+  <section>
+    <p class="lede">The guess is <b>bad at values</b>, <b>mediocre at order</b> &mdash;
+      and that is still enough, because we only ever ask it for a shortlist of 5.</p>
+    <table>
+      <caption>knnr trained on 25 labels: 10 MOOT files &times; 50 shuffles, 50:50 train:test</caption>
+      <thead><tr>
+        <th>data</th><th>err %</th><th>&rho;</th><th>top5 %</th>
+      </tr></thead>
+      <tbody data-raw="slides/fig/weak-rows.html"></tbody>
+    </table>
+    <p class="note">
+      <b>err %</b> = 100&middot;MAE / MAE(always predict the mean of the 25 labels). 100 = no better than a constant.<br>
+      <b>&rho;</b> = Spearman rank correlation, predicted vs actual, over every test row.<br>
+      <b>top5 %</b> = rank of the truly best row among the 5 best-predicted (what slide 2 reports).
+    </p>
+    <p class="note">Two files beat the constant by nothing at all (pom3d 100, Wine_quality 105),
+      and &rho; falls to 0.11 &mdash; yet their top-5 still beats the 16.3% that checking 5 random rows gets.</p>
+  </section>
+</div>
+
+</body>
+</html>

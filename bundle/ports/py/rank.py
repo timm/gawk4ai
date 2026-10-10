@@ -1,9 +1,9 @@
 """Check the C rows with the best (lowest) predictions; print how
-the best of them really ranks among all n test rows, as s=r/n.
+the best of them really ranks among all n test rows, as a percent, 100*r/n.
 usage: ... | python3 rank.py [C=5]   (lines: predicted actual)"""
 from types import SimpleNamespace
 
-from lib import fmt, lt, num, records
+from lib import lt, num, records
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     n = 1
     for x in a:
         n += lt(x, b)
-    print(fmt(n / len(a)))
+    print("%.1f" % (100 * n / len(a)))
 
 
 main()

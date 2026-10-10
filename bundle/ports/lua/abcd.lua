@@ -8,7 +8,7 @@ local function eq(a, b)    -- awk: numeric compare if both look numeric
   if x and y then return x == y end
   return a == b end
 
-local function pc(x, y) return y ~= 0 and math.floor(100*x/y + .5) or 0 end
+local function pc(x, y) return y ~= 0 and 100*x/y or 0 end
 
 local n, got, want, hit = 0, {}, {}, {}
 run({}, function(line)
@@ -18,14 +18,14 @@ run({}, function(line)
   want[b] = (want[b] or 0) + 1
   hit[a] = (hit[a] or 0) + (eq(a, b) and 1 or 0) end)
 
-print("   n,   a,   b,   c,   d,acc,pre, pf, pd, class")
+print("   n,   a,   b,   c,   d,  acc,  pre,   pf,   pd, class")
 io.stdout:flush()
 local sort = io.popen("sort -t, -k9nr", "w")
 for x, w in pairs(want) do
   local d = hit[x] or 0
   local b, c = w - d, (got[x] or 0) - d
   local a = n - b - c - d
-  sort:write(string.format("%4d,%4d,%4d,%4d,%4d,%3d,%3d,%3d,%3d, %s\n",
+  sort:write(string.format("%4d,%4d,%4d,%4d,%4d,%5.1f,%5.1f,%5.1f,%5.1f, %s\n",
     w, a, b, c, d, pc(a + d, n), pc(d, c + d), pc(c, a + c), pc(d, b + d), x))
 end
 sort:close()

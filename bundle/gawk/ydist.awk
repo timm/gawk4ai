@@ -1,24 +1,29 @@
-# usage: gawk -f ydist.awk f f    (MOOT optimize csv, 2 passes)
-# keep x columns; swap the goals (names ending in + or -) for one
-# column: distance to heaven (0 = best). Skips names ending in X.
-BEGIN   { FS=" *, *"; OFS="," }
-FNR==1  { header(); next }
-NR==FNR { for (c in w) if ($c != "?") minmax(c, $c+0); next }
-        { print xs() d2h() }
+# usage: ... | gawk -f ydist.awk   (one pass, so it buffers)
+# goals (+ or - names) -> one column: distance to heaven, 0=best.
+# min,max span every row: d2h is the label, not something we learn.
+BEGIN      { FS=OFS="," }
+/^header,/ { header() }
+/^train,/  { minmax(); row[++rows] = $0 }
+/^test,/   { minmax(); row[++rows] = $0 }
+END        { for (i=1; i<=rows; i++) print xs(row[i]) }
 
-function header(   c,out) {
-  for (c=1; c<=NF; c++)
+function header(   c,s) {
+  for (c=2; c<=NF; c++)
     if ($c ~ /[+-]$/) w[c] = $c ~ /\+$/    # heaven: 1=max, 0=min
-    else if ($c !~ /X$/) { x[c]; out = out $c OFS }
-  if (NR > 1) print out "D2h-" }
+    else if ($c !~ /X$/) { x[c]; s = s OFS $c }
+  print $1 s OFS "D2h-" }
 
-function minmax(c, v) {
-  if (!(c in lo) || v < lo[c]) lo[c] = v
-  if (!(c in hi) || v > hi[c]) hi[c] = v }
+function minmax(   c,v) {
+  for (c in w) if ($c != "?") {
+    v = $c + 0
+    if (!(c in lo) || v < lo[c]) lo[c] = v
+    if (!(c in hi) || v > hi[c]) hi[c] = v } }
 
-function xs(   c,out) {
-  for (c=1; c<=NF; c++) if (c in x) out = out $c OFS
-  return out }
+function xs(s,   c,o) {
+  $0 = s                       # assigning $0 re-splits it into fields
+  o = $1                       # the train/test tag rides along
+  for (c=2; c<=NF; c++) if (c in x) o = o OFS $c
+  return o OFS d2h() }
 
 function d2h(   c,d,n) {
   for (c in w) { n++

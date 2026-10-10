@@ -1,6 +1,6 @@
 -- usage: ... | lua rank.lua [C=5]   (lines: predicted actual)
 -- check the C rows with the best (lowest) predictions; print how
--- the best of them really ranks among all n test rows, as s=r/n.
+-- the best of them really ranks among all n test rows, as a percent, 100*r/n.
 package.path = (arg[0]:match("(.*/)") or "./") .. "?.lua;" .. package.path
 local lib = require("lib")
 
@@ -18,4 +18,4 @@ for _, i in ipairs(lib.byval(p)) do
 
 local r = 1
 for _, v in ipairs(a) do if v < b then r = r + 1 end end
-print(lib.str(r / #a))
+print(string.format("%.1f", 100 * r / #a))

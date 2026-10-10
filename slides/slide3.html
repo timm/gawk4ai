@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Few labels? Rank configs with a weak learner</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  body { --code: 13px; }
+  table { font-size: 16px; }
+  caption { font-size: 17px; padding-bottom: 7px; }
+  td { padding: 2px 10px; }
+  td:first-child { font-size: 15px; }
+  tr.mean td:first-child { font-size: 16px; }
+  .stack > * + * { margin-top: 16px; }
+  p.note { font-size: 15px; }
+</style>
+</head>
+<body class="cols-2">
+
+<h1>2. Few labels? Rank configs with a weak learner</h1>
+<p class="sub">Nair et al. (arXiv 1702.05701): label a few rows, let kNN rank the rest, check the top 5, report where the best of them really ranks</p>
+
+<div class="grid">
+  <section>
+    <h2>ydist.awk (pre: goals &rarr; distance to heaven)</h2>
+    <pre class="awk" data-src="bundle/gawk/ydist.awk"></pre>
+    <p class="note">pipeline: shuffle &rarr; ydist &rarr; some N=budget &rarr; knnr T=budget &rarr; rank C=5</p>
+  </section>
+
+  <section class="stack">
+    <div>
+      <h2>rank.awk (post: true rank of the best of the top C)</h2>
+      <pre class="awk" data-src="bundle/gawk/rank.awk"></pre>
+    </div>
+    <div>
+      <table>
+        <caption>rank of best checked row, % (lower = better; 1 = top 1%): 10 MOOT files &times; 50 shuffles, 50:50 train:test</caption>
+        <thead><tr><th>data</th><th>25</th><th>50</th><th>100</th></tr></thead>
+        <tbody data-raw="slides/fig/rank-rows.html"></tbody>
+      </table>
+      <p class="note">bold = lowest, or within 0.35&middot;sd of it (sd over every run for that file). Labels used: 25/50/100, then 5 checked. Same 10 files as the previous slide.</p>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

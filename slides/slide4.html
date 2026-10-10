@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rare classes? TWCNB on text</title>
+<link rel="stylesheet" href="../style.css">
+<style> body { --code: 13px; } </style>
+</head>
+<body class="cols-2">
+
+<h1>3. Rare classes? TWCNB on text</h1>
+<p class="sub">Rennie et al., ICML&rsquo;03, Table 4: tf-idf picks 64 words; complement NB with normalized weights</p>
+
+<div class="grid">
+  <section class="stack">
+    <div>
+      <h2>tfidf.awk</h2>
+      <pre class="awk" data-src="bundle/gawk/tfidf.awk"></pre>
+    </div>
+    <div>
+      <table>
+        <caption>macro pd % (mean recall of yes, no): 4 MOOT files &times; 20 shuffles, 50:50 train:test</caption>
+        <thead><tr><th>data</th><th>nb</th><th>twcnb</th><th>svm</th></tr></thead>
+        <tbody>
+          <tr><td>Hall</td>      <td>61.8</td><td class="b">82.3</td><td class="b">83.9</td></tr>
+          <tr><td>Kitchenham</td><td>50.2</td><td class="b">80.8</td><td>55.1</td></tr>
+          <tr><td>Radjenovic</td><td>51.4</td><td class="b">82.1</td><td>62.6</td></tr>
+          <tr><td>Wahono</td>    <td>50.9</td><td class="b">81.8</td><td>58.3</td></tr>
+          <tr class="mean"><td>mean</td><td>53.6</td><td>81.7</td><td>65.0</td></tr>
+        </tbody>
+      </table>
+      <p class="note">bold = best, or within 0.35&middot;sd of best</p>
+      <p class="note">~1% &ldquo;yes&rdquo;. svm = tf-idf (all words) + LinearSVC, class-balanced.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>twcnb.awk (replaces nb.awk)</h2>
+    <pre class="awk" data-src="bundle/gawk/twcnb.awk"></pre>
+  </section>
+</div>
+
+</body>
+</html>

@@ -17,12 +17,12 @@ function report() {
     const a = n - b - c - d
     const pd = pc(d, b + d)
     const cells = [want[x], a, b, c, d].map(v => pad(v, 4)).concat(
-      [pc(a + d, n), pc(d, c + d), pc(c, a + c), pd].map(v => pad(v, 3)))
+      [pc(a + d, n), pc(d, c + d), pc(c, a + c), pd].map(v => pad(v.toFixed(1), 5)))
     return { pd, line: cells.join(",") + ", " + x }
   })
   out.sort((u, v) => v.pd - u.pd || (u.line < v.line ? -1 : 1))
-  console.log("   n,   a,   b,   c,   d,acc,pre, pf, pd, class")
+  console.log("   n,   a,   b,   c,   d,  acc,  pre,   pf,   pd, class")
   for (const o of out) console.log(o.line)
 }
 
-function pc(x, y) { return y ? Math.trunc(100 * x / y + .5) : 0 }
+function pc(x, y) { return y ? 100 * x / y : 0 }

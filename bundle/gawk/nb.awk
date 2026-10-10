@@ -1,17 +1,20 @@
-# usage: gawk -f nb.awk [T=n W=n] f   train rows 1..T, test rows > W
-BEGIN { FS=" *, *"; m=2; k=1; T=1E32; W=10 }
-NR > W  { print classify(), $NF }
-NR <= T { train() }
+# usage: ... | gawk -f nb.awk   (rows tagged train/test by split.awk)
+# naive Bayes: count what the train rows hold, then guess every test row.
+BEGIN     { FS=","; M=2; K=1 }     # M,K: the m- and k-estimates
+/^train,/ { train(f) }             
+/^test,/  { print classify(f), $NF } 
 
-function train(   c) {
-  N++; for (c=1; c<=NF; c++) if ($c != "?") f[$NF][c][$c]++ }
+function train(f,   c) {
+  rows++; for (c=2; c<=NF; c++) if ($c != "?") f[$NF][c][$c]++ }
 
-function classify(   h,t,best,out) {
-  for (h in f) if ((t=like(h)) > best || !out) { best=t; out=h }
+function classify(f,   h,t,best,out) {
+  for (h in f) if ((t=like(f,h)) > best || !out) { best=t; out=h }
   return out }
 
-function like(h,   n,p,out,c) {    # log P(h) + sum log P(x|h)
-  n = f[h][NF][h]; p = (n+k)/(N + k*length(f)); out = log(p)
-  for (c=1; c<NF; c++)
-    if ($c != "?") out += log((f[h][c][$c] + m*p)/(n+m))
+function like(f,h,   n,p,out,c) {    # log P(h) + sum log P(x|h)
+  n   = f[h][NF][h]
+  p   = (n+K)/(rows + K*length(f))
+  out = log(p)
+  for (c=2; c<NF; c++)
+    if ($c != "?") out += log((f[h][c][$c] + M*p)/(n+M))
   return out }

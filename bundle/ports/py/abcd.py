@@ -6,18 +6,18 @@ from lib import eq, num, records
 
 
 def pc(x, y):
-    return int(100 * x / y + .5) if y else 0
+    return 100 * x / y if y else 0
 
 
 def report(n, got, want, hit):
-    print("   n,   a,   b,   c,   d,acc,pre, pf, pd, class")
+    print("   n,   a,   b,   c,   d,  acc,  pre,   pf,   pd, class")
     lines = []
     for x in want:
         d = hit[x]
         b = want[x] - d
         c = got[x] - d
         a = n - b - c - d
-        lines.append("%4d,%4d,%4d,%4d,%4d,%3d,%3d,%3d,%3d, %s" % (
+        lines.append("%4d,%4d,%4d,%4d,%4d,%5.1f,%5.1f,%5.1f,%5.1f, %s" % (
             want[x], a, b, c, d, pc(a + d, n), pc(d, c + d),
             pc(c, a + c), pc(d, b + d), x))
     lines.sort()  # as `sort -t, -k9nr`: pd descending, then whole line
