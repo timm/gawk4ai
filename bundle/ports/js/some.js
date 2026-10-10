@@ -1,0 +1,6 @@
+// usage: node some.js N=100 T=n f   (f is pre-shuffled)
+// keep N labelled rows, then the test rows (> T)
+const { opt, lines } = require("./lib")
+Object.assign(opt, { N: 0, T: 0 })
+for (const [line, nr] of lines())
+  if (nr <= opt.N || nr > opt.T) console.log(line)
