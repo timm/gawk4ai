@@ -10,89 +10,93 @@ in an afternoon, and comes close to its industrial cousins at a vanishing
 fraction of the cost. The method that produced it is one sentence long:
 "good — now write it smaller."
 
-Behind the stunt sits a new perspective on where scripting belongs. The old
-view: scripts are for early prototyping, and then the real system replaces
-them. The new view: scripting is the beginning *and* the end. Begin with
-small scripts, to understand the issue. Move to the middle — many languages,
-many tools, as much compute as the question deserves — to explore the
-options. Then return, and close with something as simple as usefully
-possible. The script at the end is not the prototype. It is the
-understanding, written down. And that suggests a standard we will defend
-throughout: no result is understood until it can be made simpler, and its
-parts ranked from most important to least.
+Behind the stunt sits a proposal: the coding of AI tools should continue
+until the code is simple. Said another way — until the code is simple, you
+have not finished. So scripting is the beginning *and* the end. Begin with
+small scripts, to understand the issue. Explore the middle with as many
+languages, tools, and CPUs as the question deserves. Then return, and close
+with something as simple as usefully possible. The script at the end is not
+the prototype. It is the understanding, written down.
 
-Why does this matter? Because we all do the same things with data, every
-day. We classify rows. We find similar examples. We rank options. We score
-text. And for each of these tasks, we reach for the same giant stacks:
-scikit-learn, pytorch, a hosted LLM. Mostly, this works. But look at the
-bill. Those stacks import hundreds of packages and millions of lines that
-nobody on your team has read, or ever will. Installs break. Results resist
-audit. And now that LLMs write much of our code, the flood is worse: a
-one-hour session can generate more code and more dialog than its human can
-review. We run, daily, systems we cannot explain.
+This matters because our daily data work — classify this, rank that, find
+the rows like these — now rides on stacks of millions of lines nobody has
+read, and LLM-generated code is making the flood worse. We run, daily,
+systems we cannot explain. Yet the core of these tasks is small: naive
+Bayes is twenty lines; nearest neighbor, thirty. The rest is ceremony, not
+content. We want the content.
 
-The core of these everyday tasks is small. Most of what ships around them is
-scaffolding, not substance — ceremony, not content. We want the content. If
-you refactor until clear — and keep refactoring — naive Bayes is twenty
-lines. Nearest neighbor is thirty. Better still, LLMs respond well to that
-one simple prompt. Asked for less, they deliver more.
+What follows starts with the claim itself — the point of intelligence is
+less intelligence — then the standard it implies, the history behind it,
+ten arguments for it and, in fairness, when not to use it. The instrument
+(gawk) and a one-hour lesson plan close the document.
 
-What follows explains the method, the history behind it, ten arguments for
-it — and, in fairness, when you should not use it.
+## The point of intelligence is less intelligence
 
-## A note on names: awk and gawk
+Now the radical statement. We are routinely urged toward complex methods
+when simpler ones would suffice. We should ask why — and push back. The
+purpose of intelligence is not to produce more intelligence. It is to
+produce less: fewer things to attend to, fewer steps to follow, fewer parts
+to hold in the head at once.
 
-Awk is the language, born at Bell Labs in 1977 and named for its authors:
-Aho, Weinberger, and Kernighan. Gawk is the GNU implementation — the one
-most widely installed today, and the one this repo uses. Arnold Robbins has
-maintained gawk since 1993: three decades of stewardship that kept a 1970s
-language alive, portable, and quietly everywhere. Asked about his design
-philosophy in a 2024 interview, Robbins offered a borrowed motto that this
-repo takes as its own: "Elegance is power cloaked in simplicity." In this
-document, "awk" names the language and "gawk" names the tool; the mindset is
-the same.
+Consider the grandest version of the opposite bet. The modern hunt for AGI
+rests on what Dario Amodei's 2017 memo called the Big Blob of Compute
+hypothesis: intelligent behavior is mostly a large, minimally structured
+mass of computation, shaped by training — and clever algorithms mostly just
+reshuffle the same computations. That memo, Kevin Roose reports, is the
+essay that started the AI race. Now look at the bill: the AI data-center
+buildouts announced in 2025 alone were priced at half a trillion dollars,
+and rising. We wish the blob well. But let the record show that most of us
+are not chasing a fantastically expensive goal that its own champions call
+an existential risk. Most of us have things to do — a thousand tasks
+smaller than AGI, due Friday.
 
-## The gawk mindset
+Start with the head. Human attention is a fixed, small budget. Barrage it
+with an ever-growing stream of new ideas and it is soon exhausted. So real
+expertise runs the other way: experts are experts, said Larkin, McDermott,
+Simon and Simon in *Science* (1980), because their feature extractors report
+only a few, most insightful things. Show a chess board to a novice and they
+see black and white pieces scattered on a grid. Show it to a master and they
+see one thing: a knight fork that cannot be defended, since it takes either
+queen or rook. Years of study did not teach the master to see more. They
+taught the master to see less — and the right less. Intelligence, matured,
+is compression.
 
-Gawk demands brief scripts. If your ideas are not clear, the gawk will be a
-mess. So the rule of gawk is: refactor until clear.
+Why, then, do we keep adding? Partly because subtraction is a blind spot.
+Adams et al. (*Nature*, 2021) showed that people systematically overlook
+subtractive changes: asked to improve a thing, we reach for what can be
+added and rarely even generate the option of taking something away. The
+simpler design loses not on merit but by never being considered.
 
-Years of gawk coding teach an "I can build that" mentality. You consume your
-own tools. For a while, this author got lost in the canon of optimization and
-active learning research. Then came the experiments. The experiments found
-many shortcuts that the literature had missed.
+And partly because, unlike simplicity, complexity sells. There is no giant
+software corporation selling the methods in this repo, because there is
+nothing here to sell: the code is so simple you can write it yourself, and
+the CPU demands so small that there is no massive infrastructure to buy.
+Whole business models depend on you believing your problem needs more than
+fifty lines and one core. Treat every recommendation of complexity as what
+it often is — a sales pitch — and ask the subtractive question first: what
+can be removed?
 
-The mindset has several parts:
+## Refactoring to simplicity
 
-**Constraint is a razor.** Gawk has no libraries and no imports. Every idea
-costs its true size, in lines. You cannot hide confusion behind an install
-command. If an algorithm does not fit in forty lines, you do not understand
-it yet. Gawk makes that visible, fast.
+One more framing, and maybe the best one. This is not a war on complexity.
+Complexity has a job. The job is to find the simplicity on the far side.
+Oliver Wendell Holmes is said to have put it this way: "I would not give a
+fig for the simplicity this side of complexity, but I would give my life
+for the simplicity on the other side of complexity." Saint-Exupéry said it
+with fewer figs: perfection is attained not when there is nothing more to
+add, but when there is nothing left to take away.
 
-**Representation comes before algorithm.** Gawk gives you strings, numbers,
-and hash arrays. Nothing else. So you must hunt for the smallest data
-representation first. Once the representation is right, the algorithm often
-collapses into a few pattern-action rules. See `bundle/gawk/nb.awk`: the
-whole naive Bayes classifier is one nested count table and twenty lines.
+So: burn down your CPUs. Run the largest, most intricate analysis you can
+afford. But when you are done, deliver two things, not one. First, the
+state-of-the-art result. Second, the tiny baseline that gets nearly the same
+answer for a tiny fraction of the resources. The big run buys the knowledge;
+the small run proves you have it.
 
-**Programs are stream rules.** Pattern-action is the Unix mindset. Data flows
-past; code reacts. Tools compose through pipes, not APIs. Each script does
-one job, and `make` glues them together. The architecture emerges from the
-pipeline, not from a class diagram.
-
-**Pipelines have replaceable parts.** Each stage is a part you can swap. Mix
-and match. Is one part too slow? Then replace it — with, say, some
-super-optimized C. But do not do that first. Try the simple part first,
-measure, and replace only what the measurements condemn. Most parts are never
-the bottleneck, so most parts stay simple.
-
-**Rewrite beats maintain.** A thirty-line script is disposable. It is cheaper
-to rewrite it than to patch it. This kills any sunk-cost attachment to old
-code. The ideas live in your head, not in the codebase.
-
-**Small code is auditable code.** You can check correctness by reading, not
-only by testing. This matters for science. A reviewer can verify the entire
-method. No one can verify "see our 50,000-line repo".
+Declare it as a standard: we do not understand a result until we know how to
+make it simpler — until we can rank its parts from most important to least,
+and say out loud which ones were doing the work. A method you cannot shrink
+is a method you do not yet understand. Simplicity is not where analysis
+starts. It is where understanding arrives.
 
 ## Some history
 
@@ -196,8 +200,9 @@ The philosopher Nancy Cartwright, examining evidence-based reasoning, issued
 a famous warning: what worked *there* may not work *here*. The pathway from
 there to here is never verbatim reuse. It is abstraction — strip the prior
 work down to its essential features — followed by adaptation of those
-features to the new domain. On this view, we never really reuse code. At
-best, we reuse the principles behind the code. And that puts a demand on the
+features to the new domain. On this view, we should  reuse code, only rarely. 
+Better, instead,  to
+reuse the principles behind the code. And that puts a demand on the
 code itself: it must *demonstrate* its principles, visibly, so that others
 can lift them out and carry them elsewhere. Twenty transparent lines
 demonstrate a principle. A framework buries it.
@@ -206,7 +211,10 @@ demonstrate a principle. A framework buries it.
 relearning it. The field is so diverse an enterprise that solutions from
 over there routinely need extensive adaptation before they work over here —
 a lesson documented at length in the literature on local versus global
-models.)
+models. As for me, I learned the evils of verbatim reuse working with NASA
+at its software verification and validation (IV&V) center. Whenever a NASA center
+delivered code based on extensive reuse, IV&V would increase (not
+decrease) the the size of the team testing that software. 
 
 ### 5. Better prompting
 
@@ -294,22 +302,11 @@ oldest pleasures. It is the instinct behind Ken Thompson's remark that one of
 his most productive days was throwing away a thousand lines of code.
 Small-tool programming turns deletion into progress, and progress into play.
 
-## Refactoring to simplicity
-
-One more framing, and maybe the best one. This is not a war on complexity.
-Complexity has a job. The job is to find the simplicity on the far side.
-
-So: burn down your CPUs. Run the largest, most intricate analysis you can
-afford. But when you are done, deliver two things, not one. First, the
-state-of-the-art result. Second, the tiny baseline that gets nearly the same
-answer for a tiny fraction of the resources. The big run buys the knowledge;
-the small run proves you have it.
-
-Declare it as a standard: we do not understand a result until we know how to
-make it simpler — until we can rank its parts from most important to least,
-and say out loud which ones were doing the work. A method you cannot shrink
-is a method you do not yet understand. Simplicity is not where analysis
-starts. It is where understanding arrives.
+And there is a rarer pleasure above that one: the moment when n ideas
+collapse into each other and you see they were all reflections of one idea.
+After that moment, much prior work can be optimized and clarified in a
+single stroke. It feels like being handed a master key. We recommend it to
+anyone.
 
 ## When not to do this
 
@@ -340,6 +337,17 @@ Do not do this for deep numerics. Decades of hard-won engineering live inside
 LAPACK and friends. Rewriting SVD in gawk teaches you SVD; it does not improve
 on LAPACK.
 
+Know gawk's shape. Gawk is happiest when data streams one way, in one pass.
+Two things fight that shape. First, interactive GUIs, where users demand
+services in any order at all. Second, designs where many parts share complex
+data structures, m-to-n, read and written from everywhere. Both problems
+have old solutions. For the sharing: write the code so there is nothing
+complex to share — pass flat text between small parts instead. For the GUI:
+do what Rob Pike's Acme editor did on Plan 9 — build one thin interface
+where commands can be called in any order, but every command is itself a
+separate, simple program, talking to the screen through a file interface.
+The GUI becomes a pipeline you can click on.
+
 Do not do this alone against a regulated or contractual stack. If the
 customer requires a supported, certified library, use it.
 
@@ -347,33 +355,61 @@ In short: tiny tools are for baselines, teaching, auditing, prototyping, and
 for all the everyday tasks where the core really is small. That covers more
 ground than most people think — but not all of it.
 
-## References
+## A note on names: awk and gawk
 
-- M.D. McIlroy, Bell Labs internal memo, October 11, 1964. Reproduced in
-  P. Salus, *A Quarter Century of UNIX*, Addison-Wesley, 1994.
-- J. Bentley, D. Knuth, M.D. McIlroy, "Programming Pearls: A Literate
-  Program," *CACM* 29(6):471–483, June 1986.
-- R.P. Loui, "Why GAWK for AI?," *ACM SIGPLAN Notices* 31(8):8–9, 1996.
-- A. Robbins, N. Beebe, *Classic Shell Scripting*, O'Reilly, 2005.
-- awk.info advocacy pages (archived):
-  https://web.archive.org/web/20110721185328/http://awk.info/?advocacy
-- R. Farrow, "Interview with Arnold Robbins," USENIX *;login:*, June 27, 2024.
-  https://www.usenix.org/publications/loginonline/interview-arnold-robbins
-- G. Socher, "AWK one-liner collection," tuxgraphics.org.
-  http://tuxgraphics.org/~guido/scripts/awk-one-liner.html
-- N. Cartwright, J. Hardie, *Evidence-Based Policy: A Practical Guide to
-  Doing It Better*, Oxford University Press, 2012.
-- T. Menzies, A. Butcher, D. Cok, et al., "Local versus Global Lessons for
-  Defect Prediction and Effort Estimation," *IEEE TSE* 39(6):822-834, 2013.
-- P.R. Cohen, *Empirical Methods for Artificial Intelligence*, MIT Press, 1995.
-- L. Bainbridge, "Ironies of Automation," *Automatica* 19(6):775–779, 1983.
-- CVE-2024-3094, the xz-utils supply-chain backdoor, 2024.
-- R. Schwartz, J. Dodge, N.A. Smith, O. Etzioni, "Green AI," *CACM* 63(12), 2020.
-- E. Strubell, A. Ganesh, A. McCallum, "Energy and Policy Considerations for
-  Deep Learning in NLP," ACL 2019.
-- K. Thompson (attributed), "One of my most productive days was throwing away
-  1,000 lines of code."
-- D.R. Hipp on self-built tools: The Changelog, episode 201, 2016.
+So much for the why. Now the instrument.
+
+Awk is the language, born at Bell Labs in 1977 and named for its authors:
+Aho, Weinberger, and Kernighan. Gawk is the GNU implementation — the one
+most widely installed today, and the one this repo uses. Arnold Robbins has
+maintained gawk since 1993: three decades of stewardship that kept a 1970s
+language alive, portable, and quietly everywhere. Asked about his design
+philosophy in a 2024 interview, Robbins offered a borrowed motto that this
+repo takes as its own: "Elegance is power cloaked in simplicity." In this
+document, "awk" names the language and "gawk" names the tool; the mindset is
+the same.
+
+## The gawk mindset
+
+Gawk demands brief scripts. If your ideas are not clear, the gawk will be a
+mess. So the rule of gawk is: refactor until clear.
+
+Years of gawk coding teach an "I can build that" mentality. You consume your
+own tools. For a while, this author got lost in the canon of optimization and
+active learning research. Then came the experiments. The experiments found
+many shortcuts that the literature had missed.
+
+The mindset has several parts:
+
+**Constraint is a razor.** Gawk has no libraries and no imports. Every idea
+costs its true size, in lines. You cannot hide confusion behind an install
+command. If an algorithm does not fit in forty lines, you do not understand
+it yet. Gawk makes that visible, fast.
+
+**Representation comes before algorithm.** Gawk gives you strings, numbers,
+and hash arrays. Nothing else. So you must hunt for the smallest data
+representation first. Once the representation is right, the algorithm often
+collapses into a few pattern-action rules. See `bundle/gawk/nb.awk`: the
+whole naive Bayes classifier is one nested count table and twenty lines.
+
+**Programs are stream rules.** Pattern-action is the Unix mindset. Data flows
+past; code reacts. Tools compose through pipes, not APIs. Each script does
+one job, and `make` glues them together. The architecture emerges from the
+pipeline, not from a class diagram.
+
+**Pipelines have replaceable parts.** Each stage is a part you can swap. Mix
+and match. Is one part too slow? Then replace it — with, say, some
+super-optimized C. But do not do that first. Try the simple part first,
+measure, and replace only what the measurements condemn. Most parts are never
+the bottleneck, so most parts stay simple.
+
+**Rewrite beats maintain.** A thirty-line script is disposable. It is cheaper
+to rewrite it than to patch it. This kills any sunk-cost attachment to old
+code. The ideas live in your head, not in the codebase.
+
+**Small code is auditable code.** You can check correctness by reading, not
+only by testing. This matters for science. A reviewer can verify the entire
+method. No one can verify "see our 50,000-line repo".
 
 ## Usage
 
@@ -460,3 +496,45 @@ Six of these eight lines are, recognizably, the seeds of the scripts in
 `bundle/gawk/`: group-and-count grows into naive Bayes; mean-of-column grows
 into discretization; the section printer grows into a data loader. One-liners
 are not toys. They are larvae.
+## References
+
+- M.D. McIlroy, Bell Labs internal memo, October 11, 1964. Reproduced in
+  P. Salus, *A Quarter Century of UNIX*, Addison-Wesley, 1994.
+- J. Bentley, D. Knuth, M.D. McIlroy, "Programming Pearls: A Literate
+  Program," *CACM* 29(6):471–483, June 1986.
+- R.P. Loui, "Why GAWK for AI?," *ACM SIGPLAN Notices* 31(8):8–9, 1996.
+- A. Robbins, N. Beebe, *Classic Shell Scripting*, O'Reilly, 2005.
+- awk.info advocacy pages (archived):
+  https://web.archive.org/web/20110721185328/http://awk.info/?advocacy
+- R. Farrow, "Interview with Arnold Robbins," USENIX *;login:*, June 27, 2024.
+  https://www.usenix.org/publications/loginonline/interview-arnold-robbins
+- G. Socher, "AWK one-liner collection," tuxgraphics.org.
+  http://tuxgraphics.org/~guido/scripts/awk-one-liner.html
+- N. Cartwright, J. Hardie, *Evidence-Based Policy: A Practical Guide to
+  Doing It Better*, Oxford University Press, 2012.
+- T. Menzies, A. Butcher, D. Cok, et al., "Local versus Global Lessons for
+  Defect Prediction and Effort Estimation," *IEEE TSE* 39(6):822-834, 2013.
+- D. Amodei, "The Big Blob of Compute Hypothesis," unpublished memo, 2017.
+- K. Roose, "The Essay That Started the AI Race," kevinroose.substack.com,
+  2025.
+- J.H. Larkin, J. McDermott, D.P. Simon, H.A. Simon, "Expert and Novice
+  Performance in Solving Physics Problems," *Science* 208(4450):1335-1342, 1980.
+- W.G. Chase, H.A. Simon, "Perception in Chess," *Cognitive Psychology*
+  4(1):55-81, 1973.
+- G.S. Adams, B.A. Converse, A.H. Hales, L.E. Klotz, "People Systematically
+  Overlook Subtractive Changes," *Nature* 592:258-261, 2021.
+- A. de Saint-Exupéry, *Terre des Hommes*, 1939 ("perfection is attained...
+  when there is nothing left to take away").
+- O.W. Holmes (attributed), "the simplicity on the other side of complexity."
+- R. Pike, "Acme: A User Interface for Programmers," *Proc. USENIX Winter
+  Conf.*, 1994.
+- P.R. Cohen, *Empirical Methods for Artificial Intelligence*, MIT Press, 1995.
+- L. Bainbridge, "Ironies of Automation," *Automatica* 19(6):775–779, 1983.
+- CVE-2024-3094, the xz-utils supply-chain backdoor, 2024.
+- R. Schwartz, J. Dodge, N.A. Smith, O. Etzioni, "Green AI," *CACM* 63(12), 2020.
+- E. Strubell, A. Ganesh, A. McCallum, "Energy and Policy Considerations for
+  Deep Learning in NLP," ACL 2019.
+- K. Thompson (attributed), "One of my most productive days was throwing away
+  1,000 lines of code."
+- D.R. Hipp on self-built tools: The Changelog, episode 201, 2016.
+
