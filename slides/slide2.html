@@ -2,40 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Numeric Xs? Discretize</title>
+<title>Numeric Xs? prep and bin</title>
 <link rel="stylesheet" href="../style.css">
-<style> body { --code: 14px; } </style>
+<style>
+  body { --code: 10.5px; }
+  table { font-size: 15px; }
+  caption { font-size: 15px; padding-bottom: 5px; }
+  td { padding: 1px 10px; }
+  h2 { margin-bottom: 4px; }
+  .stack > * + * { margin-top: 10px; }
+  p.note { font-size: 14px; }
+</style>
 </head>
 <body class="cols-2">
 
-<h1>1. Numeric Xs? Discretize</h1>
-<p class="sub">pre-processor: x &rarr; int(B / (1 + e<sup>&minus;1.7z</sup>)), z = (x&minus;&mu;)/&sigma;, B = 7</p>
+<h1>1. Numeric Xs? prep says mu, bin says which bucket</h1>
+<p class="sub">prep.awk learns the columns once and publishes them as : lines; bin.awk turns numeric x into a percent, int(Bins&middot;&sigma;(z))&middot;100/Bins, z = (x&minus;&mu;)/&sigma; clipped to &plusmn;3</p>
 
 <div class="grid">
-  <section>
-    <h2>disc.awk</h2>
-    <pre class="awk" data-src="bundle/gawk/disc.awk"></pre>
+  <section class="stack">
+    <div>
+      <h2>prep.awk &mdash; shuffle, learn the columns, emit : lines</h2>
+      <pre class="awk" data-src="bundle/gawk/prep.awk"></pre>
+    </div>
   </section>
 
-  <section>
-    <table>
-      <caption>accuracy %: 10 MOOT files &times; 20 shuffles, 50:50 train:test</caption>
-      <thead><tr><th>data</th><th>nb</th><th>nb+disc</th><th>lgbm</th></tr></thead>
-      <tbody>
-        <tr><td>diabetes</td>   <td>67.4</td><td class="b">75.9</td><td>74.1</td></tr>
-        <tr><td>ecoli</td>      <td>62.5</td><td class="b">81.4</td><td class="b">82.1</td></tr>
-        <tr><td>glass</td>      <td>49.3</td><td class="b">67.5</td><td class="b">67.9</td></tr>
-        <tr><td>iris</td>       <td>88.9</td><td class="b">94.2</td><td class="b">94.4</td></tr>
-        <tr><td>ionosphere</td> <td>73.2</td><td>88.2</td><td class="b">92.0</td></tr>
-        <tr><td>sonar</td>      <td>54.4</td><td>75.3</td><td class="b">80.8</td></tr>
-        <tr><td>vehicle</td>    <td>61.5</td><td>55.9</td><td class="b">75.3</td></tr>
-        <tr><td>segment</td>    <td>75.1</td><td>89.4</td><td class="b">97.6</td></tr>
-        <tr><td>column3C</td>   <td>48.3</td><td class="b">76.7</td><td class="b">81.7</td></tr>
-        <tr><td>page.blocks</td><td>92.9</td><td>91.8</td><td class="b">97.0</td></tr>
-        <tr class="mean"><td>mean</td><td>67.4</td><td>79.6</td><td>84.3</td></tr>
-      </tbody>
-    </table>
-    <p class="note">bold = best, or within 0.35&middot;sd of best</p>
+  <section class="stack">
+    <div>
+      <h2>bin.awk &mdash; a :bins row after every :cells row</h2>
+      <pre class="awk" data-src="bundle/gawk/bin.awk"></pre>
+    </div>
+    <div>
+      <table>
+        <caption>accuracy %: 10 MOOT files &times; 20 shuffles, 50:50 train:test, same shuffled rows given to both</caption>
+        <thead><tr><th>data</th><th>gawk<br>prep|bin|nb</th><th>lgbm</th></tr></thead>
+        <tbody data-raw="slides/fig/nb-rows.html"></tbody>
+      </table>
+      <p class="note">bold = best, or within 0.35&middot;sd of best. lgbm = LightGBM defaults, told which columns are numeric and which are categories &mdash; the same split, from the same shuffle.</p>
+    </div>
   </section>
 </div>
 

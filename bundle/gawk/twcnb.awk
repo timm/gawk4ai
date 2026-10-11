@@ -3,7 +3,7 @@
 BEGIN   { FS="," }
 NR <= T { keep(); next }
 NR==T+1 { learn() }
-        { print classify(), $NF }
+        { print classify() "\t" $NF }
 
 function keep(   c) {                                   # step 1
   y[NR] = $NF

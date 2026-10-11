@@ -18,11 +18,12 @@ moot:   ## get the data
 	@test -d $(MOOT) || git clone --depth 1 https://github.com/timm/moot $(MOOT)
 
 nb: gawk moot      ## 0. naive Bayes
-	$G split.awk Seed=$S $C/soybean.csv | $G nb.awk | $G abcd.awk
+	$G prep.awk Seed=$S $C/soybean.csv \
+	  | $G bin.awk | $G nb.awk | $G abcd.awk
 
-disc: gawk moot    ## 1. numeric x: discretize, then nb
-	$G split.awk Seed=$S $C/diabetes.csv \
-	  | $G disc.awk | $G nb.awk | $G abcd.awk
+disc: gawk moot    ## 1. numeric x: prep bins them, then nb
+	$G prep.awk Seed=$S $C/diabetes.csv \
+	  | $G bin.awk | $G nb.awk | $G abcd.awk
 
 opt: gawk moot     ## 2. good configs: label 25, kNN guesses, check 5
 	$G split.awk Seed=$S N=25 $(MOOT)/optimize/config/SS-K.csv \
