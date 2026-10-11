@@ -28,17 +28,15 @@ FILES = [("SS-A", "config/SS-A.csv"), ("SS-K", "config/SS-K.csv"),
 SH = r"""
 set -e
 cd {gawk}
-gawk -f shuffle.awk seed={seed} {src} > {t}/s
-T=$(( ($(wc -l < {t}/s) - 1) / 2 ))
-gawk -f ydist.awk {t}/s {t}/s > {t}/y
-if [ {n} -eq 0 ]; then tail -n +2 {t}/y | gawk -F, 'NR > '$T' {{print $NF}}' > {t}/p
-else
-  (head -1 {t}/y; tail -n +2 {t}/y | gawk -f some.awk N={n} T=$T) > {t}/m
-  gawk -f knnr.awk T={n} {t}/m > {t}/p
-  tail -n +2 {t}/m | head -{n} | gawk -F, '{{print $NF}}' > {t}/train
+gawk -f split.awk Seed={seed} N={n} {src} | gawk -f ydist.awk > {t}/y
+gawk -F, '/^train,/ {{print $NF}}' {t}/y > {t}/train
+if [ {n} -eq 0 ]; then gawk -F, '/^test,/ {{print $NF}}' {t}/y > {t}/p
+else gawk -f knnr.awk {t}/y > {t}/p
 fi
 """
 
+# split.awk tags rows train/test (N>0 labels just N of them), ydist.awk
+# folds the goals into one D2h column, knnr.awk prints "y^ y" per test row.
 #-- scoring -----------------------------------------------------------------
 def run(src, seed, n):  # one pipeline run: guesses, actuals, labelled mean, secs
   t0 = time.perf_counter()
