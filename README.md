@@ -148,6 +148,28 @@ the generated code was short and easy to browse. The prompting was
 straightforward. The result runs. Small is not a handicap; small is how it
 got done at all.
 
+It also measures up. Every tool here was checked against the library a
+working analyst would otherwise reach for — same files, same splits, same
+scoring. On ten MOOT classification files (twenty shuffles, 50:50
+train:test), naive Bayes over discretized numbers averages 79.6% accuracy
+against LightGBM's 84.3%; the gawk tool is best or tied on five files of ten,
+LightGBM on nine; and the whole gawk experiment finishes in 26 seconds
+against 439. On text with rare classes (four files, roughly 1% "yes"), tf-idf
+feeding complement naive Bayes averages 81.7% macro recall against a
+class-balanced LinearSVC's 65.0, and wins on all four files — though here the
+SVM is the quicker experiment, 154 seconds against 285. On optimization under
+a label budget (ten files, fifty shuffles), labelling 25 rows and checking
+the five best-ranked returns a row in the best 5.8% of the space, where
+checking five rows at random returns 16.3%.
+
+Read those numbers honestly. LightGBM is the better classifier, and it is
+running at its defaults — defaults built for data far larger than these
+files. Ask it to fit 46 training rows and `min_child_samples=20` has it
+building a hundred two-leaf stumps, because no deeper split is legal. Tune it
+for small data and it pulls further ahead. So the claim is not that gawk
+wins. The claim is the exchange rate: a few points of accuracy, against two
+orders of magnitude less code to install, read, and trust.
+
 ### 2. The straw man (good science)
 
 The methodological precedent here is much older than this work. In his 1995
@@ -238,6 +260,14 @@ channel for a supply-chain attack; see the 2024 xz-utils backdoor
 completely, in an afternoon. A transitive dependency tree of millions of
 lines cannot. For safety-critical or reproducible work, the auditable
 artifact is the trustworthy one.
+
+Measure the tree you are trusting. On the machine that ran these
+experiments, the installed numpy, scipy, scikit-learn and LightGBM ship
+995,456 non-blank lines of Python, Cython and C between them — and that count
+omits LightGBM's own engine, which arrives as a 4.7 MB compiled library whose
+source (39,468 lines, plus 126,599 more vendored from other projects) is not
+in the wheel at all. The eleven scripts in `bundle/gawk` come to 223 lines,
+170 of them code, and depend on nothing but gawk.
 
 ### 8. The Richard Hipp argument (usability)
 

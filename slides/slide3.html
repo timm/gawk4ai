@@ -33,7 +33,7 @@
     <div>
       <h2>ydist.awk (pre: many goals &rarr; one distance to heaven)</h2>
       <pre class="awk" data-src="bundle/gawk/ydist.awk"></pre>
-      <p class="note">pipeline: shuffle &rarr; ydist &rarr; some N=budget &rarr; knnr T=budget &rarr; rank C=5<br>
+      <p class="note">pipeline: split Seed=s N=budget &rarr; ydist &rarr; knnr &rarr; rank C=5<br>
         Cost = N + 5 labels: N to train the guess, 5 to check its shortlist. Nothing else is ever labelled.</p>
     </div>
   </section>

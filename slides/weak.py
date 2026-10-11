@@ -126,7 +126,8 @@ def main():
     for k, v in three.items(): five[k] += [v]; best[k] += v <= cut5
 
   d = [st.mean(c) for c in down]
-  print(f"{'mean':26} {d[0]:7.1f} {d[1]:7.2f}" + "".join(f"{v:8.1f}" for v in d[2:]))
+  print(f"{'mean':26} {d[0]:7.1f} {d[1]:7.2f}"          # rand prints last,
+        + "".join(f"{v:8.1f}" for v in d[3:] + [d[2]]))  # as in the rows above
   rank += [f'<tr class="mean"><td>mean</td><td>{d[0]:.0f}</td>'
            f'<td>{d[1]:.2f}</td>'
            + "".join(f'<td>{v:.1f}</td>' for v in d[2:]) + '</tr>']
