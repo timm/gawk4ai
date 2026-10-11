@@ -1,14 +1,17 @@
 #!/usr/bin/env python3 -B
 # vim: set et sw=2 ts=2 sts=2 :
-# weak.py: how weak is the knn@N guesser?  Runs the `make opt` pipeline --
-# shuffle, ydist, label N rows, knnr -- and scores its guesses three ways,
-# averaged over SEEDS:
+# weak.py: can a weak guesser find good rows cheaply?  Runs the `make opt`
+# pipeline -- split (shuffle, label N), ydist, knnr -- and scores it three
+# ways, averaged over SEEDS:
 #   err%   100*MAE / MAE(always guess the mean of the N labels); 100 = useless
 #   rho    Spearman rank correlation, guessed vs actual, over every test row
 #   top5%  rank of the truly best row among the C with the best guesses
+# err% and rho say how little the guess knows; top5% is what the slides
+# report, because ranking is all that a search ever asks of it.
 # N=0 is the no-learner baseline: check C rows at random.
-# Writes the table bodies and the two scatter panels that slides 2a, 3 and 4
-# pull in.  Needs the MOOT data: cd bundle/gawk && make moot.
+# Writes the table bodies that slides 3 and 4 pull in: slide 3 gets err%,
+# rho, that baseline, and one column per budget.
+# Needs the MOOT data: cd bundle/gawk && make moot.
 # usage: python3 slides/weak.py   (or: make fig)
 import os, random, statistics as st, subprocess, time
 
