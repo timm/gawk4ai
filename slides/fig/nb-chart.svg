@@ -1,0 +1,76 @@
+<svg viewBox="0 0 900 389" width="900" height="389" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="accuracy of gawk versus LightGBM, by dataset">
+<text x="20" y="20" text-anchor="start" font-size="13" fill="#5f6368" >data</text>
+<text x="170" y="20" text-anchor="end" font-size="13" fill="#5f6368" >gawk</text>
+<text x="265" y="20" text-anchor="end" font-size="13" fill="#5f6368" >lgbm</text>
+<text x="810" y="20" text-anchor="middle" font-size="13" fill="#5f6368" >delta</text>
+<text x="20" y="51" text-anchor="start" font-size="15" fill="#202124" >diabetes</text>
+<text x="170" y="51" text-anchor="end" font-size="15" fill="#1559b3" >75 (2)</text>
+<text x="265" y="51" text-anchor="end" font-size="15" fill="#5f6368" >74 (2)</text>
+<circle cx="182" cy="46" r="3.5" fill="#1559b3"/>
+<path d="M810.3989588336459,40 h37.288753234277806 a4,4 0 0 1 4,4 v6 a4,4 0 0 1 -4,4 h-37.288753234277806 z" fill="#1559b3"/>
+<text x="860" y="51" text-anchor="start" font-size="14" fill="#5f6368" >+1</text>
+<text x="20" y="80" text-anchor="start" font-size="15" fill="#202124" >ecoli</text>
+<text x="170" y="80" text-anchor="end" font-size="15" fill="#1559b3" >83 (2)</text>
+<text x="265" y="80" text-anchor="end" font-size="15" fill="#5f6368" >82 (3)</text>
+<circle cx="182" cy="75" r="3.5" fill="#1559b3"/>
+<path d="M810.3989588336459,69 h31.39035991509536 a4,4 0 0 1 4,4 v6 a4,4 0 0 1 -4,4 h-31.39035991509536 z" fill="#1559b3"/>
+<text x="854" y="80" text-anchor="start" font-size="14" fill="#5f6368" >+1</text>
+<text x="20" y="109" text-anchor="start" font-size="15" fill="#202124" >iris</text>
+<text x="170" y="109" text-anchor="end" font-size="15" fill="#5f6368" >93 (2)</text>
+<text x="265" y="109" text-anchor="end" font-size="15" fill="#cc7000" >94 (2)</text>
+<circle cx="277" cy="104" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,98 h-24.3122879320764 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h24.3122879320764 z" fill="#cc7000"/>
+<text x="774" y="109" text-anchor="end" font-size="14" fill="#5f6368" >-1</text>
+<text x="20" y="138" text-anchor="start" font-size="15" fill="#202124" >glass</text>
+<text x="170" y="138" text-anchor="end" font-size="15" fill="#5f6368" >66 (3)</text>
+<text x="265" y="138" text-anchor="end" font-size="15" fill="#cc7000" >68 (4)</text>
+<circle cx="277" cy="133" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,127 h-46.27415614107042 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h46.27415614107042 z" fill="#cc7000"/>
+<text x="752" y="138" text-anchor="end" font-size="14" fill="#5f6368" >-2</text>
+<text x="20" y="167" text-anchor="start" font-size="15" fill="#202124" >ionosphere</text>
+<text x="170" y="167" text-anchor="end" font-size="15" fill="#5f6368" >90 (2)</text>
+<text x="265" y="167" text-anchor="end" font-size="15" fill="#cc7000" >92 (2)</text>
+<circle cx="277" cy="162" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,156 h-70.8023516387243 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h70.8023516387243 z" fill="#cc7000"/>
+<text x="728" y="167" text-anchor="end" font-size="14" fill="#5f6368" >-3</text>
+<text x="20" y="196" text-anchor="start" font-size="15" fill="#202124" >page.blocks</text>
+<text x="170" y="196" text-anchor="end" font-size="15" fill="#5f6368" >93 (0)</text>
+<text x="265" y="196" text-anchor="end" font-size="15" fill="#cc7000" >97 (0)</text>
+<circle cx="277" cy="191" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,185 h-102.54605981015186 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h102.54605981015186 z" fill="#cc7000"/>
+<text x="696" y="196" text-anchor="end" font-size="14" fill="#5f6368" >-4</text>
+<text x="20" y="225" text-anchor="start" font-size="15" fill="#202124" >column3C</text>
+<text x="170" y="225" text-anchor="end" font-size="15" fill="#5f6368" >76 (2)</text>
+<text x="265" y="225" text-anchor="end" font-size="15" fill="#cc7000" >82 (2)</text>
+<circle cx="277" cy="220" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,214 h-166.78702720316994 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h166.78702720316994 z" fill="#cc7000"/>
+<text x="632" y="225" text-anchor="end" font-size="14" fill="#5f6368" >-6</text>
+<text x="20" y="254" text-anchor="start" font-size="15" fill="#202124" >sonar</text>
+<text x="170" y="254" text-anchor="end" font-size="15" fill="#5f6368" >73 (3)</text>
+<text x="265" y="254" text-anchor="end" font-size="15" fill="#cc7000" >81 (4)</text>
+<circle cx="277" cy="249" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,243 h-220.59266869195142 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h220.59266869195142 z" fill="#cc7000"/>
+<text x="578" y="254" text-anchor="end" font-size="14" fill="#5f6368" >-8</text>
+<text x="20" y="283" text-anchor="start" font-size="15" fill="#202124" >segment</text>
+<text x="170" y="283" text-anchor="end" font-size="15" fill="#5f6368" >90 (1)</text>
+<text x="265" y="283" text-anchor="end" font-size="15" fill="#cc7000" >98 (0)</text>
+<circle cx="277" cy="278" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,272 h-222.49830345661042 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h222.49830345661042 z" fill="#cc7000"/>
+<text x="576" y="283" text-anchor="end" font-size="14" fill="#5f6368" >-8</text>
+<text x="20" y="312" text-anchor="start" font-size="15" fill="#202124" >vehicle</text>
+<text x="170" y="312" text-anchor="end" font-size="15" fill="#5f6368" >60 (2)</text>
+<text x="265" y="312" text-anchor="end" font-size="15" fill="#cc7000" >75 (2)</text>
+<circle cx="277" cy="307" r="3.5" fill="#cc7000"/>
+<path d="M810.3989588336459,301 h-438.0866709015696 a4,4 0 0 0 -4,4 v6 a4,4 0 0 0 4,4 h438.0866709015696 z" fill="#cc7000"/>
+<text x="360" y="312" text-anchor="end" font-size="14" fill="#5f6368" >-16</text>
+<line x1="810.3989588336459" y1="32" x2="810.3989588336459" y2="326" stroke="#9aa0a6" stroke-width="1"/>
+<line x1="20" y1="330" x2="880" y2="330" stroke="#e6e8e9" stroke-width="1"/>
+<text x="20" y="352" text-anchor="start" font-size="15" fill="#5f6368" >mean</text>
+<text x="170" y="352" text-anchor="end" font-size="15" fill="#5f6368" >80</text>
+<text x="265" y="352" text-anchor="end" font-size="15" fill="#5f6368" >84</text>
+<text x="818" y="352" text-anchor="start" font-size="14" fill="#5f6368" >-4</text>
+<text x="20" y="374" text-anchor="start" font-size="15" fill="#5f6368" >seconds</text>
+<text x="170" y="374" text-anchor="end" font-size="15" fill="#1559b3" >12</text>
+<text x="265" y="374" text-anchor="end" font-size="15" fill="#5f6368" >109</text>
+<text x="818" y="374" text-anchor="start" font-size="14" fill="#5f6368" >9x faster</text>
+</svg>

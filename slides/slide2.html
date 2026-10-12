@@ -12,6 +12,12 @@
   h2 { margin-bottom: 4px; }
   .stack > * + * { margin-top: 10px; }
   p.note { font-size: 14px; }
+  .legend { display: flex; gap: 22px; margin: 2px 0 10px;
+            font-size: 15px; color: #3c4043; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .dot.ink { background: #1559b3; }
+  .dot.pick { background: #cc7000; }
 </style>
 </head>
 <body class="cols-2">
@@ -33,12 +39,16 @@
       <pre class="awk" data-src="bundle/gawk/bin.awk"></pre>
     </div>
     <div>
-      <table>
-        <caption>accuracy %: 10 MOOT files &times; 20 shuffles, 50:50 train:test, same shuffled rows given to both</caption>
-        <thead><tr><th>data</th><th>gawk<br>prep|bin|nb</th><th>lgbm</th></tr></thead>
-        <tbody data-raw="slides/fig/nb-rows.html"></tbody>
-      </table>
-      <p class="note">bold = best, or within 0.35&middot;sd of best. lgbm = LightGBM defaults, told which columns are numeric and which are categories &mdash; the same split, from the same shuffle.</p>
+      <div class="legend">
+        <span><i class="dot ink"></i> gawk ahead</span>
+        <span><i class="dot pick"></i> lgbm ahead</span>
+        <span>accuracy %, mean (sd) of 20 shuffles, 50:50 train:test</span>
+      </div>
+      <div data-raw="slides/fig/nb-chart.svg"></div>
+      <p class="note">Both sides get the same shuffled rows and the same
+        split. A dot marks the winner: the loser failed Cliff&rsquo;s delta
+        (&gt;0.197) or KS at 95%, so no row here ties. lgbm = LightGBM
+        defaults, told which columns are numeric.</p>
     </div>
   </section>
 </div>
