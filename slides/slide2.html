@@ -2,53 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Numeric Xs? prep and bin</title>
+<title>shuf, bins, nb1b</title>
 <link rel="stylesheet" href="../style.css">
-<style>
-  body { --code: 10.5px; }
-  table { font-size: 15px; }
-  caption { font-size: 15px; padding-bottom: 5px; }
-  td { padding: 1px 10px; }
-  h2 { margin-bottom: 4px; }
-  .stack > * + * { margin-top: 10px; }
-  p.note { font-size: 13px; margin-top: 8px; }
-  .legend { display: flex; gap: 22px; margin: 2px 0 6px;
-            font-size: 15px; color: #3c4043; }
-  .legend span { display: inline-flex; align-items: center; gap: 7px; }
-  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-  .dot.ink { background: #1559b3; }
-  .dot.pick { background: #cc7000; }
-</style>
+<style> body { --code: 11px; } h2 { margin-bottom: 4px; } </style>
 </head>
-<body class="cols-2">
+<body class="cols-3">
 
-<h1>1. Numeric Xs? prep says mu, bin says which bucket</h1>
-<p class="sub">prep.awk learns the columns once and publishes them as : lines; bin.awk turns numeric x into a percent, int(Bins&middot;&sigma;(z))&middot;100/Bins, z = (x&minus;&mu;)/&sigma; clipped to &plusmn;3</p>
+<h1>1. The whole classifier: three scripts, 105 lines</h1>
+<p class="sub">shuf deals the rows out in eras (blank line between, and a
+binsX countdown); bins turns numeric cells into one of B buckets, using mu
+and sd frozen at the end of each era; nb1b just counts</p>
 
 <div class="grid">
-  <section class="stack">
-    <div>
-      <h2>prep.awk &mdash; shuffle, learn the columns, emit : lines</h2>
-      <pre class="awk" data-src="bundle/gawk/prep.awk"></pre>
-    </div>
+  <section>
+    <h2>shuf.awk &mdash; shuffle, cut into eras</h2>
+    <pre class="awk" data-src="bundle/gawk/shuf.awk"></pre>
   </section>
-
-  <section class="stack">
-    <div>
-      <h2>bin.awk &mdash; a :bins row after every :cells row</h2>
-      <pre class="awk" data-src="bundle/gawk/bin.awk"></pre>
-    </div>
-    <div>
-      <div class="legend">
-        <span><i class="dot ink"></i> gawk ahead</span>
-        <span><i class="dot pick"></i> lgbm ahead</span>
-        <span>shuf|nb1 vs lgbm: accuracy %, mean (sd) of 20 shuffles; test = the last era (64 rows), both train on all the rest</span>
-      </div>
-      <div data-raw="slides/fig/nb-chart.svg"></div>
-      <p class="note">Chosen by size alone &mdash; size predicts the gap
-        (r =&minus;0.56 on log rows). Here gawk is 2 behind, best or tied on 15 of 27;
-        over 1500 rows the gap is &minus;8 and gawk ties on 1 of 13.</p>
-    </div>
+  <section>
+    <h2>bins.awk &mdash; numeric cell &rarr; bucket</h2>
+    <pre class="awk" data-src="bundle/gawk/bins.awk"></pre>
+  </section>
+  <section>
+    <h2>nb.awk &mdash; naive Bayes, pure counting</h2>
+    <pre class="awk" data-src="bundle/gawk/nb.awk"></pre>
   </section>
 </div>
 

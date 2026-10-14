@@ -1,6 +1,6 @@
 #!/usr/bin/env python3 -B
 # vim: set et sw=2 ts=2 sts=2 cc=75 :
-# small.py: how good is `shuf | nb1` on small data?  Runs it on every
+# small.py: how good is `shuf | bins | nb` on small data?  Runs it on every
 # MOOT classify file with 128..499 rows x 20 shuffles.  The last era
 # (64 rows) is the test set, so both sides train on `all - era[-1]`.
 # LightGBM gets the SAME shuffled rows and the SAME split.
@@ -17,8 +17,10 @@ MOOT = os.path.expanduser("~/tmp/moot/classify")
 FIG  = HERE + "/fig"
 TMP  = HERE + "/../../tmp/small"; os.makedirs(TMP, exist_ok=True)
 SEEDS, ERA, MIN = range(1, 21), 64, 128
+MAX  = 10**9 if "-a" in sys.argv else 500   # -a: every scorable file, not
+TAG  = "nball" if "-a" in sys.argv else "nb27"  # just the small ones
 BAD = "trains weather shuttle.landing.control sponge spectf.train " \
-      "spectf.test wine".split()
+      "spectf.test wine spectrometer".split()   # goal is numeric,
 
 FILES = []
 for f in sorted(os.listdir(MOOT)):
@@ -26,12 +28,13 @@ for f in sorted(os.listdir(MOOT)):
   name = f[:-4]
   if name in BAD: continue
   n = sum(1 for _ in open(f"{MOOT}/{f}")) - 1
-  if MIN <= n < 500: FILES += [(name, n)]
+  if MIN <= n < MAX: FILES += [(name, n)]
 
 def gawk(src, seed):
   t0 = time.perf_counter()
   sh = (f"gawk -f {GAWK}/shuf.awk Seed={seed} Era={ERA} {src} > {TMP}/s; "
-        f"gawk -f {GAWK}/nb1.awk t=0 {TMP}/s > {TMP}/pairs")
+        f"gawk -f {GAWK}/bins.awk {TMP}/s | "
+        f"gawk -f {GAWK}/nb.awk > {TMP}/pairs")
   subprocess.run(["bash","-c",sh], check=True, capture_output=True)
   secs = time.perf_counter() - t0
   n = sum(1 for l in open(TMP+"/s") if l.strip()) - 1
@@ -51,8 +54,12 @@ def lgbm(n):
   import lightgbm as lgb
   t0 = time.perf_counter()
   L = [l.strip().split(",") for l in open(TMP+"/s") if l.strip()]
-  rows = L[1:]
-  x, y = [r[:-1] for r in rows], [r[-1] for r in rows]
+  hdr, rows = L[0], L[1:]
+  ycol = max(c for c, h in enumerate(hdr) if h.endswith("!"))
+  xcol = [c for c, h in enumerate(hdr)        # same rule as nb1's head():
+          if c != ycol and not h.endswith("X")]   # skip the class, skip X
+  x = [[r[c] for c in xcol] for r in rows]    # (shuf's binsX lands here)
+  y = [r[ycol] for r in rows]
   cols, cat = [], []
   for c in range(len(x[0])):
     v = [r[c] for r in x]
@@ -169,7 +176,7 @@ def report(raw, secs, rows):
            + "<td></td></tr>"]
   open(f"{FIG}/nb-rows.html", "w").write("\n".join(body) + "\n")
   row = ('<td>Small data<small>accuracy</small></td>'
-         '<td style="text-align:left" class="cmp">shuf|nb1 / lgbm</td>'
+         '<td style="text-align:left" class="cmp">shuf|bins|nb / lgbm</td>'
          f'<td class="trip">{trip(d, ".0f")}</td>'
          f'<td class="trip">{trip(best, "d")}</td>'
          f'<td class="trip">{trip(secs, ".0f", lo=True)}</td>')
@@ -199,13 +206,13 @@ def main():
     raw[name] = runs; rows[name] = N
     print(name, "done", flush=True)
   json.dump({"raw": raw, "secs": secs, "rows": rows},
-            open(f"{FIG}/nb27.json", "w"))
+            open(f"{FIG}/{TAG}.json", "w"))
   report(raw, secs, rows)
 
 
 if __name__ == "__main__":
-  if os.path.exists(f"{FIG}/nb27.json") and "-c" in sys.argv:
-    j = json.load(open(f"{FIG}/nb27.json"))     # -c: redraw, do not rerun
+  if os.path.exists(f"{FIG}/{TAG}.json") and "-c" in sys.argv:
+    j = json.load(open(f"{FIG}/{TAG}.json"))     # -c: redraw, do not rerun
     report(j["raw"], j["secs"], j["rows"])
   else:
     main()

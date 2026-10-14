@@ -1,212 +1,431 @@
-<svg viewBox="0 0 900 390" width="900" height="390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="accuracy of gawk versus LightGBM, by dataset">
+<svg viewBox="0 0 900 762" width="900" height="762" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="accuracy of gawk versus LightGBM, by dataset">
 <text x="20" y="16" text-anchor="start" font-size="11" fill="#5f6368">data</text>
 <text x="252" y="16" text-anchor="end" font-size="11" fill="#5f6368">rows</text>
 <text x="338" y="16" text-anchor="end" font-size="11" fill="#5f6368">gawk</text>
 <text x="432" y="16" text-anchor="end" font-size="11" fill="#5f6368">lgbm</text>
-<text x="736" y="16" text-anchor="middle" font-size="11" fill="#5f6368">delta</text>
+<text x="793" y="16" text-anchor="middle" font-size="11" fill="#5f6368">delta</text>
 <text x="20" y="34" text-anchor="start" font-size="11" fill="#202124">tae</text>
 <text x="252" y="34" text-anchor="end" font-size="11" fill="#5f6368">151</text>
-<text x="338" y="34" text-anchor="end" font-size="11" fill="#1559b3">50 (6)</text>
+<text x="338" y="34" text-anchor="end" font-size="11" fill="#1559b3">50 (8)</text>
 <text x="432" y="34" text-anchor="end" font-size="11" fill="#5f6368">43 (5)</text>
 <circle cx="345" cy="30" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,26 h105.27067669172936 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-105.27067669172936 z" fill="#1559b3"/>
-<text x="851" y="34" text-anchor="start" font-size="11" fill="#5f6368">+7</text>
+<path d="M792.7858719646799,26 h55.92568064753493 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-55.92568064753493 z" fill="#1559b3"/>
+<text x="858" y="34" text-anchor="start" font-size="11" fill="#5f6368">+7</text>
 <text x="20" y="46" text-anchor="start" font-size="11" fill="#202124">flags</text>
 <text x="252" y="46" text-anchor="end" font-size="11" fill="#5f6368">194</text>
-<text x="338" y="46" text-anchor="end" font-size="11" fill="#1559b3">57 (5)</text>
+<text x="338" y="46" text-anchor="end" font-size="11" fill="#1559b3">58 (5)</text>
 <text x="432" y="46" text-anchor="end" font-size="11" fill="#5f6368">51 (6)</text>
 <circle cx="345" cy="42" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,38 h101.66165413533838 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-101.66165413533838 z" fill="#1559b3"/>
-<text x="847" y="46" text-anchor="start" font-size="11" fill="#5f6368">+7</text>
+<path d="M792.7858719646799,38 h55.278145695364174 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-55.278145695364174 z" fill="#1559b3"/>
+<text x="857" y="46" text-anchor="start" font-size="11" fill="#5f6368">+7</text>
 <text x="20" y="58" text-anchor="start" font-size="11" fill="#202124">primary.tumor</text>
 <text x="252" y="58" text-anchor="end" font-size="11" fill="#5f6368">339</text>
 <text x="338" y="58" text-anchor="end" font-size="11" fill="#1559b3">47 (6)</text>
 <text x="432" y="58" text-anchor="end" font-size="11" fill="#5f6368">42 (6)</text>
 <circle cx="345" cy="54" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,50 h69.18045112781965 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-69.18045112781965 z" fill="#1559b3"/>
-<text x="815" y="58" text-anchor="start" font-size="11" fill="#5f6368">+5</text>
+<path d="M792.7858719646799,50 h35.85209713024278 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-35.85209713024278 z" fill="#1559b3"/>
+<text x="838" y="58" text-anchor="start" font-size="11" fill="#5f6368">+5</text>
 <text x="20" y="70" text-anchor="start" font-size="11" fill="#202124">hepatitis</text>
 <text x="252" y="70" text-anchor="end" font-size="11" fill="#5f6368">155</text>
-<text x="338" y="70" text-anchor="end" font-size="11" fill="#1559b3">84 (5)</text>
+<text x="338" y="70" text-anchor="end" font-size="11" fill="#1559b3">85 (4)</text>
 <text x="432" y="70" text-anchor="end" font-size="11" fill="#5f6368">81 (3)</text>
 <circle cx="345" cy="66" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,62 h54.74436090225572 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-54.74436090225572 z" fill="#1559b3"/>
-<text x="800" y="70" text-anchor="start" font-size="11" fill="#5f6368">+4</text>
+<path d="M792.7858719646799,62 h31.319352465047814 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-31.319352465047814 z" fill="#1559b3"/>
+<text x="833" y="70" text-anchor="start" font-size="11" fill="#5f6368">+4</text>
 <text x="20" y="82" text-anchor="start" font-size="11" fill="#202124">heart.h</text>
 <text x="252" y="82" text-anchor="end" font-size="11" fill="#5f6368">294</text>
-<text x="338" y="82" text-anchor="end" font-size="11" fill="#1559b3">81 (4)</text>
+<text x="338" y="82" text-anchor="end" font-size="11" fill="#1559b3">82 (4)</text>
 <text x="432" y="82" text-anchor="end" font-size="11" fill="#5f6368">79 (5)</text>
 <circle cx="345" cy="78" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,74 h36.69924812030081 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-36.69924812030081 z" fill="#1559b3"/>
-<text x="782" y="82" text-anchor="start" font-size="11" fill="#5f6368">+3</text>
-<text x="20" y="94" text-anchor="start" font-size="11" fill="#202124">haberman</text>
-<text x="252" y="94" text-anchor="end" font-size="11" fill="#5f6368">306</text>
-<text x="338" y="94" text-anchor="end" font-size="11" fill="#1559b3">71 (5)</text>
-<text x="432" y="94" text-anchor="end" font-size="11" fill="#5f6368">69 (4)</text>
+<path d="M792.7858719646799,74 h19.663723325974956 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-19.663723325974956 z" fill="#1559b3"/>
+<text x="821" y="82" text-anchor="start" font-size="11" fill="#5f6368">+3</text>
+<text x="20" y="94" text-anchor="start" font-size="11" fill="#202124">heart.statlog</text>
+<text x="252" y="94" text-anchor="end" font-size="11" fill="#5f6368">270</text>
+<text x="338" y="94" text-anchor="end" font-size="11" fill="#1559b3">83 (3)</text>
+<text x="432" y="94" text-anchor="end" font-size="11" fill="#5f6368">80 (4)</text>
 <circle cx="345" cy="90" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,86 h27.075187969924855 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-27.075187969924855 z" fill="#1559b3"/>
-<text x="772" y="94" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<path d="M792.7858719646799,86 h18.368653421633553 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-18.368653421633553 z" fill="#1559b3"/>
+<text x="820" y="94" text-anchor="start" font-size="11" fill="#5f6368">+3</text>
 <text x="20" y="106" text-anchor="start" font-size="11" fill="#202124">lymph</text>
 <text x="252" y="106" text-anchor="end" font-size="11" fill="#5f6368">148</text>
 <text x="338" y="106" text-anchor="end" font-size="11" fill="#1559b3">82 (4)</text>
 <text x="432" y="106" text-anchor="end" font-size="11" fill="#5f6368">80 (5)</text>
 <circle cx="345" cy="102" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,98 h25.87218045112786 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-25.87218045112786 z" fill="#1559b3"/>
-<text x="771" y="106" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
-<text x="20" y="118" text-anchor="start" font-size="11" fill="#202124">spect.test</text>
-<text x="252" y="118" text-anchor="end" font-size="11" fill="#5f6368">187</text>
-<text x="338" y="118" text-anchor="end" font-size="11" fill="#1559b3">68 (6)</text>
-<text x="432" y="118" text-anchor="end" font-size="11" fill="#cc7000">66 (5)</text>
+<path d="M792.7858719646799,98 h14.48344370860923 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-14.48344370860923 z" fill="#1559b3"/>
+<text x="816" y="106" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<text x="20" y="118" text-anchor="start" font-size="11" fill="#202124">haberman</text>
+<text x="252" y="118" text-anchor="end" font-size="11" fill="#5f6368">306</text>
+<text x="338" y="118" text-anchor="end" font-size="11" fill="#1559b3">71 (5)</text>
+<text x="432" y="118" text-anchor="end" font-size="11" fill="#5f6368">69 (4)</text>
 <circle cx="345" cy="114" r="2.5" fill="#1559b3"/>
-<circle cx="439" cy="114" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,110 h25.87218045112786 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-25.87218045112786 z" fill="#1559b3"/>
-<text x="771" y="118" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
-<text x="20" y="130" text-anchor="start" font-size="11" fill="#202124">breast.cancer</text>
-<text x="252" y="130" text-anchor="end" font-size="11" fill="#5f6368">286</text>
-<text x="338" y="130" text-anchor="end" font-size="11" fill="#1559b3">72 (6)</text>
-<text x="432" y="130" text-anchor="end" font-size="11" fill="#cc7000">70 (3)</text>
+<path d="M792.7858719646799,110 h13.835908756438585 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-13.835908756438585 z" fill="#1559b3"/>
+<text x="816" y="118" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<text x="20" y="130" text-anchor="start" font-size="11" fill="#202124">spect.test</text>
+<text x="252" y="130" text-anchor="end" font-size="11" fill="#5f6368">187</text>
+<text x="338" y="130" text-anchor="end" font-size="11" fill="#1559b3">68 (6)</text>
+<text x="432" y="130" text-anchor="end" font-size="11" fill="#cc7000">66 (5)</text>
 <circle cx="345" cy="126" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="126" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,122 h22.263157894736878 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-22.263157894736878 z" fill="#1559b3"/>
-<text x="768" y="130" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
-<text x="20" y="142" text-anchor="start" font-size="11" fill="#202124">breastcancer</text>
-<text x="252" y="142" text-anchor="end" font-size="11" fill="#5f6368">286</text>
-<text x="338" y="142" text-anchor="end" font-size="11" fill="#1559b3">72 (6)</text>
-<text x="432" y="142" text-anchor="end" font-size="11" fill="#cc7000">70 (3)</text>
+<path d="M792.7858719646799,122 h12.540838852097068 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-12.540838852097068 z" fill="#1559b3"/>
+<text x="814" y="130" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<text x="20" y="142" text-anchor="start" font-size="11" fill="#202124">balance.scale</text>
+<text x="252" y="142" text-anchor="end" font-size="11" fill="#5f6368">625</text>
+<text x="338" y="142" text-anchor="end" font-size="11" fill="#1559b3">89 (4)</text>
+<text x="432" y="142" text-anchor="end" font-size="11" fill="#cc7000">87 (4)</text>
 <circle cx="345" cy="138" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="138" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,134 h22.263157894736878 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-22.263157894736878 z" fill="#1559b3"/>
-<text x="768" y="142" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
-<text x="20" y="154" text-anchor="start" font-size="11" fill="#202124">heart.c</text>
-<text x="252" y="154" text-anchor="end" font-size="11" fill="#5f6368">303</text>
-<text x="338" y="154" text-anchor="end" font-size="11" fill="#1559b3">83 (4)</text>
-<text x="432" y="154" text-anchor="end" font-size="11" fill="#cc7000">82 (4)</text>
+<path d="M792.7858719646799,134 h10.598233995584906 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-10.598233995584906 z" fill="#1559b3"/>
+<text x="812" y="142" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<text x="20" y="154" text-anchor="start" font-size="11" fill="#202124">breast.cancer</text>
+<text x="252" y="154" text-anchor="end" font-size="11" fill="#5f6368">286</text>
+<text x="338" y="154" text-anchor="end" font-size="11" fill="#1559b3">72 (6)</text>
+<text x="432" y="154" text-anchor="end" font-size="11" fill="#cc7000">70 (3)</text>
 <circle cx="345" cy="150" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="150" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,146 h21.060150375939884 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-21.060150375939884 z" fill="#1559b3"/>
-<text x="766" y="154" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
-<text x="20" y="166" text-anchor="start" font-size="11" fill="#202124">dermatology</text>
-<text x="252" y="166" text-anchor="end" font-size="11" fill="#5f6368">366</text>
-<text x="338" y="166" text-anchor="end" font-size="11" fill="#1559b3">98 (1)</text>
-<text x="432" y="166" text-anchor="end" font-size="11" fill="#5f6368">97 (2)</text>
+<path d="M792.7858719646799,146 h10.598233995584906 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-10.598233995584906 z" fill="#1559b3"/>
+<text x="812" y="154" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<text x="20" y="166" text-anchor="start" font-size="11" fill="#202124">breastcancer</text>
+<text x="252" y="166" text-anchor="end" font-size="11" fill="#5f6368">286</text>
+<text x="338" y="166" text-anchor="end" font-size="11" fill="#1559b3">72 (6)</text>
+<text x="432" y="166" text-anchor="end" font-size="11" fill="#cc7000">70 (3)</text>
 <circle cx="345" cy="162" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,158 h16.248120300751907 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-16.248120300751907 z" fill="#1559b3"/>
-<text x="762" y="166" text-anchor="start" font-size="11" fill="#5f6368">+1</text>
-<text x="20" y="178" text-anchor="start" font-size="11" fill="#202124">heart.statlog</text>
-<text x="252" y="178" text-anchor="end" font-size="11" fill="#5f6368">270</text>
-<text x="338" y="178" text-anchor="end" font-size="11" fill="#1559b3">82 (4)</text>
-<text x="432" y="178" text-anchor="end" font-size="11" fill="#5f6368">81 (4)</text>
+<circle cx="439" cy="162" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,158 h10.598233995584906 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-10.598233995584906 z" fill="#1559b3"/>
+<text x="812" y="166" text-anchor="start" font-size="11" fill="#5f6368">+2</text>
+<text x="20" y="178" text-anchor="start" font-size="11" fill="#202124">dermatology</text>
+<text x="252" y="178" text-anchor="end" font-size="11" fill="#5f6368">366</text>
+<text x="338" y="178" text-anchor="end" font-size="11" fill="#1559b3">98 (1)</text>
+<text x="432" y="178" text-anchor="end" font-size="11" fill="#5f6368">97 (2)</text>
 <circle cx="345" cy="174" r="2.5" fill="#1559b3"/>
-<path d="M736.3308270676691,170 h12.639097744360924 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-12.639097744360924 z" fill="#1559b3"/>
-<text x="758" y="178" text-anchor="start" font-size="11" fill="#5f6368">+1</text>
-<text x="20" y="190" text-anchor="start" font-size="11" fill="#202124">solar.flare1</text>
-<text x="252" y="190" text-anchor="end" font-size="11" fill="#5f6368">323</text>
-<text x="338" y="190" text-anchor="end" font-size="11" fill="#1559b3">97 (2)</text>
-<text x="432" y="190" text-anchor="end" font-size="11" fill="#cc7000">97 (2)</text>
+<path d="M792.7858719646799,170 h7.360559234731454 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-7.360559234731454 z" fill="#1559b3"/>
+<text x="809" y="178" text-anchor="start" font-size="11" fill="#5f6368">+1</text>
+<text x="20" y="190" text-anchor="start" font-size="11" fill="#202124">breast.w</text>
+<text x="252" y="190" text-anchor="end" font-size="11" fill="#5f6368">699</text>
+<text x="338" y="190" text-anchor="end" font-size="11" fill="#1559b3">98 (2)</text>
+<text x="432" y="190" text-anchor="end" font-size="11" fill="#5f6368">96 (2)</text>
 <circle cx="345" cy="186" r="2.5" fill="#1559b3"/>
-<circle cx="439" cy="186" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,182 h-0.6090225563909826 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h0.6090225563909826 z" fill="#cc7000"/>
-<text x="727" y="190" text-anchor="end" font-size="11" fill="#5f6368">-0</text>
-<text x="20" y="202" text-anchor="start" font-size="11" fill="#202124">ecoli</text>
-<text x="252" y="202" text-anchor="end" font-size="11" fill="#5f6368">336</text>
-<text x="338" y="202" text-anchor="end" font-size="11" fill="#1559b3">82 (6)</text>
-<text x="432" y="202" text-anchor="end" font-size="11" fill="#cc7000">83 (4)</text>
+<path d="M792.7858719646799,182 h6.065489330389937 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-6.065489330389937 z" fill="#1559b3"/>
+<text x="808" y="190" text-anchor="start" font-size="11" fill="#5f6368">+1</text>
+<text x="20" y="202" text-anchor="start" font-size="11" fill="#202124">diabetes</text>
+<text x="252" y="202" text-anchor="end" font-size="11" fill="#5f6368">768</text>
+<text x="338" y="202" text-anchor="end" font-size="11" fill="#1559b3">77 (4)</text>
+<text x="432" y="202" text-anchor="end" font-size="11" fill="#cc7000">76 (5)</text>
 <circle cx="345" cy="198" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="198" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,194 h-7.827067669172948 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h7.827067669172948 z" fill="#cc7000"/>
-<text x="720" y="202" text-anchor="end" font-size="11" fill="#5f6368">-1</text>
-<text x="20" y="214" text-anchor="start" font-size="11" fill="#202124">iris</text>
-<text x="252" y="214" text-anchor="end" font-size="11" fill="#5f6368">150</text>
-<text x="338" y="214" text-anchor="end" font-size="11" fill="#5f6368">91 (5)</text>
-<text x="432" y="214" text-anchor="end" font-size="11" fill="#cc7000">94 (2)</text>
+<path d="M792.7858719646799,194 h6.065489330389937 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-6.065489330389937 z" fill="#1559b3"/>
+<text x="808" y="202" text-anchor="start" font-size="11" fill="#5f6368">+1</text>
+<text x="20" y="214" text-anchor="start" font-size="11" fill="#202124">heart.c</text>
+<text x="252" y="214" text-anchor="end" font-size="11" fill="#5f6368">303</text>
+<text x="338" y="214" text-anchor="end" font-size="11" fill="#1559b3">83 (4)</text>
+<text x="432" y="214" text-anchor="end" font-size="11" fill="#cc7000">82 (4)</text>
+<circle cx="345" cy="210" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="210" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,206 h-39.10526315789468 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h39.10526315789468 z" fill="#cc7000"/>
-<text x="688" y="214" text-anchor="end" font-size="11" fill="#5f6368">-3</text>
-<text x="20" y="226" text-anchor="start" font-size="11" fill="#202124">column2C</text>
-<text x="252" y="226" text-anchor="end" font-size="11" fill="#5f6368">310</text>
-<text x="338" y="226" text-anchor="end" font-size="11" fill="#5f6368">79 (4)</text>
-<text x="432" y="226" text-anchor="end" font-size="11" fill="#cc7000">83 (5)</text>
+<path d="M792.7858719646799,206 h6.065489330389937 a3,3 0 0 1 3,3 v1 a3,3 0 0 1 -3,3 h-6.065489330389937 z" fill="#1559b3"/>
+<text x="808" y="214" text-anchor="start" font-size="11" fill="#5f6368">+1</text>
+<text x="20" y="226" text-anchor="start" font-size="11" fill="#202124">ecoli</text>
+<text x="252" y="226" text-anchor="end" font-size="11" fill="#5f6368">336</text>
+<text x="338" y="226" text-anchor="end" font-size="11" fill="#1559b3">82 (5)</text>
+<text x="432" y="226" text-anchor="end" font-size="11" fill="#cc7000">83 (4)</text>
+<circle cx="345" cy="222" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="222" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,218 h-57.150375939849596 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h57.150375939849596 z" fill="#cc7000"/>
-<text x="670" y="226" text-anchor="end" font-size="11" fill="#5f6368">-4</text>
-<text x="20" y="238" text-anchor="start" font-size="11" fill="#202124">colic</text>
-<text x="252" y="238" text-anchor="end" font-size="11" fill="#5f6368">368</text>
-<text x="338" y="238" text-anchor="end" font-size="11" fill="#5f6368">78 (6)</text>
-<text x="432" y="238" text-anchor="end" font-size="11" fill="#cc7000">83 (3)</text>
+<path d="M792.7858719646799,218 h0.0 a1.9426048565121619,1.9426048565121619 0 0 0 -1.9426048565121619,1.9426048565121619 v3.1147902869756763 a1.9426048565121619,1.9426048565121619 0 0 0 1.9426048565121619,1.9426048565121619 h-0.0 z" fill="#cc7000"/>
+<text x="785" y="226" text-anchor="end" font-size="11" fill="#5f6368">-0</text>
+<text x="20" y="238" text-anchor="start" font-size="11" fill="#202124">solar.flare1</text>
+<text x="252" y="238" text-anchor="end" font-size="11" fill="#5f6368">323</text>
+<text x="338" y="238" text-anchor="end" font-size="11" fill="#1559b3">97 (2)</text>
+<text x="432" y="238" text-anchor="end" font-size="11" fill="#cc7000">97 (2)</text>
+<circle cx="345" cy="234" r="2.5" fill="#1559b3"/>
 <circle cx="439" cy="234" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,230 h-66.77443609022555 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h66.77443609022555 z" fill="#cc7000"/>
-<text x="661" y="238" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
-<text x="20" y="250" text-anchor="start" font-size="11" fill="#202124">ionosphere</text>
-<text x="252" y="250" text-anchor="end" font-size="11" fill="#5f6368">351</text>
-<text x="338" y="250" text-anchor="end" font-size="11" fill="#5f6368">89 (3)</text>
-<text x="432" y="250" text-anchor="end" font-size="11" fill="#cc7000">94 (2)</text>
+<path d="M792.7858719646799,230 h0.0 a1.9426048565121619,1.9426048565121619 0 0 0 -1.9426048565121619,1.9426048565121619 v3.1147902869756763 a1.9426048565121619,1.9426048565121619 0 0 0 1.9426048565121619,1.9426048565121619 h-0.0 z" fill="#cc7000"/>
+<text x="785" y="238" text-anchor="end" font-size="11" fill="#5f6368">-0</text>
+<text x="20" y="250" text-anchor="start" font-size="11" fill="#202124">solar.flare2</text>
+<text x="252" y="250" text-anchor="end" font-size="11" fill="#5f6368">1066</text>
+<text x="338" y="250" text-anchor="end" font-size="11" fill="#5f6368">98 (1)</text>
+<text x="432" y="250" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
 <circle cx="439" cy="246" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,242 h-77.60150375939838 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h77.60150375939838 z" fill="#cc7000"/>
-<text x="650" y="250" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
-<text x="20" y="262" text-anchor="start" font-size="11" fill="#202124">vote</text>
-<text x="252" y="262" text-anchor="end" font-size="11" fill="#5f6368">435</text>
-<text x="338" y="262" text-anchor="end" font-size="11" fill="#5f6368">90 (4)</text>
-<text x="432" y="262" text-anchor="end" font-size="11" fill="#cc7000">95 (3)</text>
+<path d="M792.7858719646799,242 h-2.8278145695364856 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h2.8278145695364856 z" fill="#cc7000"/>
+<text x="781" y="250" text-anchor="end" font-size="11" fill="#5f6368">-1</text>
+<text x="20" y="262" text-anchor="start" font-size="11" fill="#202124">german</text>
+<text x="252" y="262" text-anchor="end" font-size="11" fill="#5f6368">1001</text>
+<text x="338" y="262" text-anchor="end" font-size="11" fill="#5f6368">75 (6)</text>
+<text x="432" y="262" text-anchor="end" font-size="11" fill="#cc7000">76 (4)</text>
 <circle cx="439" cy="258" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,254 h-78.80451127819538 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h78.80451127819538 z" fill="#cc7000"/>
-<text x="649" y="262" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
-<text x="20" y="274" text-anchor="start" font-size="11" fill="#202124">column3C</text>
-<text x="252" y="274" text-anchor="end" font-size="11" fill="#5f6368">310</text>
-<text x="338" y="274" text-anchor="end" font-size="11" fill="#5f6368">78 (4)</text>
-<text x="432" y="274" text-anchor="end" font-size="11" fill="#cc7000">84 (6)</text>
+<path d="M792.7858719646799,254 h-3.4753495217071304 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h3.4753495217071304 z" fill="#cc7000"/>
+<text x="780" y="262" text-anchor="end" font-size="11" fill="#5f6368">-1</text>
+<text x="20" y="274" text-anchor="start" font-size="11" fill="#202124">credit.g</text>
+<text x="252" y="274" text-anchor="end" font-size="11" fill="#5f6368">1000</text>
+<text x="338" y="274" text-anchor="end" font-size="11" fill="#5f6368">74 (5)</text>
+<text x="432" y="274" text-anchor="end" font-size="11" fill="#cc7000">76 (4)</text>
 <circle cx="439" cy="270" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,266 h-90.83458646616532 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h90.83458646616532 z" fill="#cc7000"/>
-<text x="636" y="274" text-anchor="end" font-size="11" fill="#5f6368">-6</text>
-<text x="20" y="286" text-anchor="start" font-size="11" fill="#202124">glass</text>
-<text x="252" y="286" text-anchor="end" font-size="11" fill="#5f6368">214</text>
-<text x="338" y="286" text-anchor="end" font-size="11" fill="#5f6368">68 (5)</text>
-<text x="432" y="286" text-anchor="end" font-size="11" fill="#cc7000">75 (5)</text>
+<path d="M792.7858719646799,266 h-9.303164091243616 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h9.303164091243616 z" fill="#cc7000"/>
+<text x="774" y="274" text-anchor="end" font-size="11" fill="#5f6368">-1</text>
+<text x="20" y="286" text-anchor="start" font-size="11" fill="#202124">soybean</text>
+<text x="252" y="286" text-anchor="end" font-size="11" fill="#5f6368">683</text>
+<text x="338" y="286" text-anchor="end" font-size="11" fill="#5f6368">91 (3)</text>
+<text x="432" y="286" text-anchor="end" font-size="11" fill="#cc7000">92 (4)</text>
 <circle cx="439" cy="282" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,278 h-112.48872180451121 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h112.48872180451121 z" fill="#cc7000"/>
-<text x="615" y="286" text-anchor="end" font-size="11" fill="#5f6368">-8</text>
-<text x="20" y="298" text-anchor="start" font-size="11" fill="#202124">arrhythmia</text>
-<text x="252" y="298" text-anchor="end" font-size="11" fill="#5f6368">452</text>
-<text x="338" y="298" text-anchor="end" font-size="11" fill="#5f6368">64 (5)</text>
-<text x="432" y="298" text-anchor="end" font-size="11" fill="#cc7000">72 (6)</text>
+<path d="M792.7858719646799,278 h-9.95069904341426 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h9.95069904341426 z" fill="#cc7000"/>
+<text x="774" y="286" text-anchor="end" font-size="11" fill="#5f6368">-2</text>
+<text x="20" y="298" text-anchor="start" font-size="11" fill="#202124">credit.a</text>
+<text x="252" y="298" text-anchor="end" font-size="11" fill="#5f6368">690</text>
+<text x="338" y="298" text-anchor="end" font-size="11" fill="#5f6368">86 (4)</text>
+<text x="432" y="298" text-anchor="end" font-size="11" fill="#cc7000">88 (4)</text>
 <circle cx="439" cy="294" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,290 h-129.33082706766913 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h129.33082706766913 z" fill="#cc7000"/>
-<text x="598" y="298" text-anchor="end" font-size="11" fill="#5f6368">-9</text>
-<text x="20" y="310" text-anchor="start" font-size="11" fill="#202124">sonar</text>
-<text x="252" y="310" text-anchor="end" font-size="11" fill="#5f6368">208</text>
-<text x="338" y="310" text-anchor="end" font-size="11" fill="#5f6368">75 (4)</text>
-<text x="432" y="310" text-anchor="end" font-size="11" fill="#cc7000">85 (7)</text>
+<path d="M792.7858719646799,290 h-11.893303899926423 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h11.893303899926423 z" fill="#cc7000"/>
+<text x="772" y="298" text-anchor="end" font-size="11" fill="#5f6368">-2</text>
+<text x="20" y="310" text-anchor="start" font-size="11" fill="#202124">splice</text>
+<text x="252" y="310" text-anchor="end" font-size="11" fill="#5f6368">3190</text>
+<text x="338" y="310" text-anchor="end" font-size="11" fill="#5f6368">95 (3)</text>
+<text x="432" y="310" text-anchor="end" font-size="11" fill="#cc7000">97 (2)</text>
 <circle cx="439" cy="306" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,302 h-154.593984962406 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h154.593984962406 z" fill="#cc7000"/>
-<text x="573" y="310" text-anchor="end" font-size="11" fill="#5f6368">-10</text>
-<text x="20" y="322" text-anchor="start" font-size="11" fill="#202124">autos</text>
-<text x="252" y="322" text-anchor="end" font-size="11" fill="#5f6368">205</text>
-<text x="338" y="322" text-anchor="end" font-size="11" fill="#5f6368">67 (4)</text>
-<text x="432" y="322" text-anchor="end" font-size="11" fill="#cc7000">79 (4)</text>
+<path d="M792.7858719646799,302 h-11.893303899926423 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h11.893303899926423 z" fill="#cc7000"/>
+<text x="772" y="310" text-anchor="end" font-size="11" fill="#5f6368">-2</text>
+<text x="20" y="322" text-anchor="start" font-size="11" fill="#202124">hypothyroid</text>
+<text x="252" y="322" text-anchor="end" font-size="11" fill="#5f6368">3772</text>
+<text x="338" y="322" text-anchor="end" font-size="11" fill="#5f6368">97 (2)</text>
+<text x="432" y="322" text-anchor="end" font-size="11" fill="#cc7000">99 (2)</text>
 <circle cx="439" cy="318" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,314 h-175.0451127819548 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h175.0451127819548 z" fill="#cc7000"/>
-<text x="552" y="322" text-anchor="end" font-size="11" fill="#5f6368">-12</text>
-<text x="20" y="334" text-anchor="start" font-size="11" fill="#202124">audiology</text>
-<text x="252" y="334" text-anchor="end" font-size="11" fill="#5f6368">226</text>
-<text x="338" y="334" text-anchor="end" font-size="11" fill="#5f6368">58 (7)</text>
-<text x="432" y="334" text-anchor="end" font-size="11" fill="#cc7000">71 (5)</text>
+<path d="M792.7858719646799,314 h-14.48344370860923 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h14.48344370860923 z" fill="#cc7000"/>
+<text x="769" y="322" text-anchor="end" font-size="11" fill="#5f6368">-2</text>
+<text x="20" y="334" text-anchor="start" font-size="11" fill="#202124">COMPAS53</text>
+<text x="252" y="334" text-anchor="end" font-size="11" fill="#5f6368">7102</text>
+<text x="338" y="334" text-anchor="end" font-size="11" fill="#5f6368">97 (2)</text>
+<text x="432" y="334" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
 <circle cx="439" cy="330" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,326 h-197.9022556390977 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h197.9022556390977 z" fill="#cc7000"/>
-<text x="529" y="334" text-anchor="end" font-size="11" fill="#5f6368">-13</text>
-<text x="20" y="346" text-anchor="start" font-size="11" fill="#202124">colic.orig</text>
-<text x="252" y="346" text-anchor="end" font-size="11" fill="#5f6368">368</text>
-<text x="338" y="346" text-anchor="end" font-size="11" fill="#5f6368">69 (5)</text>
-<text x="432" y="346" text-anchor="end" font-size="11" fill="#cc7000">83 (5)</text>
+<path d="M792.7858719646799,326 h-16.42604856512139 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h16.42604856512139 z" fill="#cc7000"/>
+<text x="767" y="334" text-anchor="end" font-size="11" fill="#5f6368">-2</text>
+<text x="20" y="346" text-anchor="start" font-size="11" fill="#202124">page.blocks</text>
+<text x="252" y="346" text-anchor="end" font-size="11" fill="#5f6368">5473</text>
+<text x="338" y="346" text-anchor="end" font-size="11" fill="#5f6368">94 (3)</text>
+<text x="432" y="346" text-anchor="end" font-size="11" fill="#cc7000">97 (2)</text>
 <circle cx="439" cy="342" r="2.5" fill="#cc7000"/>
-<path d="M736.3308270676691,338 h-209.93233082706763 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h209.93233082706763 z" fill="#cc7000"/>
-<text x="517" y="346" text-anchor="end" font-size="11" fill="#5f6368">-14</text>
-<line x1="736.3308270676691" y1="22" x2="736.3308270676691" y2="347" stroke="#9aa0a6" stroke-width="1"/>
-<line x1="20" y1="350" x2="880" y2="350" stroke="#e6e8e9" stroke-width="1"/>
-<text x="20" y="365" text-anchor="start" font-size="11" fill="#5f6368">mean, all 27</text>
-<text x="338" y="365" text-anchor="end" font-size="11" fill="#5f6368">75</text>
-<text x="432" y="365" text-anchor="end" font-size="11" fill="#5f6368">77</text>
-<text x="742" y="365" text-anchor="start" font-size="11" fill="#5f6368">-2</text>
-<text x="20" y="380" text-anchor="start" font-size="11" fill="#5f6368">seconds</text>
-<text x="338" y="380" text-anchor="end" font-size="11" fill="#1559b3">56</text>
-<text x="432" y="380" text-anchor="end" font-size="11" fill="#5f6368">297</text>
-<text x="742" y="380" text-anchor="start" font-size="11" fill="#5f6368">5x faster</text>
+<path d="M792.7858719646799,338 h-22.253863134657877 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h22.253863134657877 z" fill="#cc7000"/>
+<text x="762" y="346" text-anchor="end" font-size="11" fill="#5f6368">-3</text>
+<text x="20" y="358" text-anchor="start" font-size="11" fill="#202124">cmc</text>
+<text x="252" y="358" text-anchor="end" font-size="11" fill="#5f6368">1473</text>
+<text x="338" y="358" text-anchor="end" font-size="11" fill="#5f6368">50 (6)</text>
+<text x="432" y="358" text-anchor="end" font-size="11" fill="#cc7000">53 (7)</text>
+<circle cx="439" cy="354" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,350 h-22.90139808682852 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h22.90139808682852 z" fill="#cc7000"/>
+<text x="761" y="358" text-anchor="end" font-size="11" fill="#5f6368">-3</text>
+<text x="20" y="370" text-anchor="start" font-size="11" fill="#202124">iris</text>
+<text x="252" y="370" text-anchor="end" font-size="11" fill="#5f6368">150</text>
+<text x="338" y="370" text-anchor="end" font-size="11" fill="#5f6368">91 (4)</text>
+<text x="432" y="370" text-anchor="end" font-size="11" fill="#cc7000">94 (2)</text>
+<circle cx="439" cy="366" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,362 h-25.491537895511442 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h25.491537895511442 z" fill="#cc7000"/>
+<text x="758" y="370" text-anchor="end" font-size="11" fill="#5f6368">-3</text>
+<text x="20" y="382" text-anchor="start" font-size="11" fill="#202124">mushroom</text>
+<text x="252" y="382" text-anchor="end" font-size="11" fill="#5f6368">8124</text>
+<text x="338" y="382" text-anchor="end" font-size="11" fill="#5f6368">96 (2)</text>
+<text x="432" y="382" text-anchor="end" font-size="11" fill="#cc7000">100 (0)</text>
+<circle cx="439" cy="378" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,374 h-27.434142752023604 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h27.434142752023604 z" fill="#cc7000"/>
+<text x="756" y="382" text-anchor="end" font-size="11" fill="#5f6368">-4</text>
+<text x="20" y="394" text-anchor="start" font-size="11" fill="#202124">column2C</text>
+<text x="252" y="394" text-anchor="end" font-size="11" fill="#5f6368">310</text>
+<text x="338" y="394" text-anchor="end" font-size="11" fill="#5f6368">79 (4)</text>
+<text x="432" y="394" text-anchor="end" font-size="11" fill="#cc7000">83 (5)</text>
+<circle cx="439" cy="390" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,386 h-28.729212656365007 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h28.729212656365007 z" fill="#cc7000"/>
+<text x="755" y="394" text-anchor="end" font-size="11" fill="#5f6368">-4</text>
+<text x="20" y="406" text-anchor="start" font-size="11" fill="#202124">colic</text>
+<text x="252" y="406" text-anchor="end" font-size="11" fill="#5f6368">368</text>
+<text x="338" y="406" text-anchor="end" font-size="11" fill="#5f6368">78 (6)</text>
+<text x="432" y="406" text-anchor="end" font-size="11" fill="#cc7000">83 (3)</text>
+<circle cx="439" cy="402" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,398 h-36.49963208241354 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h36.49963208241354 z" fill="#cc7000"/>
+<text x="747" y="406" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="418" text-anchor="start" font-size="11" fill="#202124">anneal</text>
+<text x="252" y="418" text-anchor="end" font-size="11" fill="#5f6368">898</text>
+<text x="338" y="418" text-anchor="end" font-size="11" fill="#5f6368">94 (2)</text>
+<text x="432" y="418" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="414" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,410 h-39.08977189109646 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h39.08977189109646 z" fill="#cc7000"/>
+<text x="745" y="418" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="430" text-anchor="start" font-size="11" fill="#202124">anneal.orig</text>
+<text x="252" y="430" text-anchor="end" font-size="11" fill="#5f6368">898</text>
+<text x="338" y="430" text-anchor="end" font-size="11" fill="#5f6368">94 (2)</text>
+<text x="432" y="430" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="426" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,422 h-39.08977189109646 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h39.08977189109646 z" fill="#cc7000"/>
+<text x="745" y="430" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="442" text-anchor="start" font-size="11" fill="#202124">ionosphere</text>
+<text x="252" y="442" text-anchor="end" font-size="11" fill="#5f6368">351</text>
+<text x="338" y="442" text-anchor="end" font-size="11" fill="#5f6368">89 (3)</text>
+<text x="432" y="442" text-anchor="end" font-size="11" fill="#cc7000">94 (2)</text>
+<circle cx="439" cy="438" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,434 h-39.08977189109646 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h39.08977189109646 z" fill="#cc7000"/>
+<text x="745" y="442" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="454" text-anchor="start" font-size="11" fill="#202124">sick</text>
+<text x="252" y="454" text-anchor="end" font-size="11" fill="#5f6368">3772</text>
+<text x="338" y="454" text-anchor="end" font-size="11" fill="#5f6368">93 (3)</text>
+<text x="432" y="454" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="450" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,446 h-41.03237674760862 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h41.03237674760862 z" fill="#cc7000"/>
+<text x="743" y="454" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="466" text-anchor="start" font-size="11" fill="#202124">vote</text>
+<text x="252" y="466" text-anchor="end" font-size="11" fill="#5f6368">435</text>
+<text x="338" y="466" text-anchor="end" font-size="11" fill="#5f6368">90 (4)</text>
+<text x="432" y="466" text-anchor="end" font-size="11" fill="#cc7000">95 (3)</text>
+<circle cx="439" cy="462" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,458 h-41.03237674760862 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h41.03237674760862 z" fill="#cc7000"/>
+<text x="743" y="466" text-anchor="end" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="478" text-anchor="start" font-size="11" fill="#202124">optdigits</text>
+<text x="252" y="478" text-anchor="end" font-size="11" fill="#5f6368">5620</text>
+<text x="338" y="478" text-anchor="end" font-size="11" fill="#5f6368">92 (3)</text>
+<text x="432" y="478" text-anchor="end" font-size="11" fill="#cc7000">98 (2)</text>
+<circle cx="439" cy="474" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,470 h-48.80279617365716 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h48.80279617365716 z" fill="#cc7000"/>
+<text x="735" y="478" text-anchor="end" font-size="11" fill="#5f6368">-6</text>
+<text x="20" y="490" text-anchor="start" font-size="11" fill="#202124">column3C</text>
+<text x="252" y="490" text-anchor="end" font-size="11" fill="#5f6368">310</text>
+<text x="338" y="490" text-anchor="end" font-size="11" fill="#5f6368">78 (4)</text>
+<text x="432" y="490" text-anchor="end" font-size="11" fill="#cc7000">84 (6)</text>
+<circle cx="439" cy="486" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,482 h-50.745401030169205 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h50.745401030169205 z" fill="#cc7000"/>
+<text x="733" y="490" text-anchor="end" font-size="11" fill="#5f6368">-6</text>
+<text x="20" y="502" text-anchor="start" font-size="11" fill="#202124">spambase</text>
+<text x="252" y="502" text-anchor="end" font-size="11" fill="#5f6368">4601</text>
+<text x="338" y="502" text-anchor="end" font-size="11" fill="#5f6368">89 (3)</text>
+<text x="432" y="502" text-anchor="end" font-size="11" fill="#cc7000">96 (3)</text>
+<circle cx="439" cy="498" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,494 h-50.745401030169205 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h50.745401030169205 z" fill="#cc7000"/>
+<text x="733" y="502" text-anchor="end" font-size="11" fill="#5f6368">-6</text>
+<text x="20" y="514" text-anchor="start" font-size="11" fill="#202124">waveform5000</text>
+<text x="252" y="514" text-anchor="end" font-size="11" fill="#5f6368">5000</text>
+<text x="338" y="514" text-anchor="end" font-size="11" fill="#5f6368">81 (3)</text>
+<text x="432" y="514" text-anchor="end" font-size="11" fill="#cc7000">87 (3)</text>
+<circle cx="439" cy="510" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,506 h-51.392935982339964 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h51.392935982339964 z" fill="#cc7000"/>
+<text x="732" y="514" text-anchor="end" font-size="11" fill="#5f6368">-7</text>
+<text x="20" y="526" text-anchor="start" font-size="11" fill="#202124">segment</text>
+<text x="252" y="526" text-anchor="end" font-size="11" fill="#5f6368">2310</text>
+<text x="338" y="526" text-anchor="end" font-size="11" fill="#5f6368">90 (3)</text>
+<text x="432" y="526" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="522" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,518 h-64.99116997792498 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h64.99116997792498 z" fill="#cc7000"/>
+<text x="719" y="526" text-anchor="end" font-size="11" fill="#5f6368">-8</text>
+<text x="20" y="538" text-anchor="start" font-size="11" fill="#202124">arrhythmia</text>
+<text x="252" y="538" text-anchor="end" font-size="11" fill="#5f6368">452</text>
+<text x="338" y="538" text-anchor="end" font-size="11" fill="#5f6368">64 (5)</text>
+<text x="432" y="538" text-anchor="end" font-size="11" fill="#cc7000">72 (6)</text>
+<circle cx="439" cy="534" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,530 h-68.22884473877855 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h68.22884473877855 z" fill="#cc7000"/>
+<text x="716" y="538" text-anchor="end" font-size="11" fill="#5f6368">-9</text>
+<text x="20" y="550" text-anchor="start" font-size="11" fill="#202124">glass</text>
+<text x="252" y="550" text-anchor="end" font-size="11" fill="#5f6368">214</text>
+<text x="338" y="550" text-anchor="end" font-size="11" fill="#5f6368">66 (4)</text>
+<text x="432" y="550" text-anchor="end" font-size="11" fill="#cc7000">75 (5)</text>
+<circle cx="439" cy="546" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,542 h-70.17144959529071 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h70.17144959529071 z" fill="#cc7000"/>
+<text x="714" y="550" text-anchor="end" font-size="11" fill="#5f6368">-9</text>
+<text x="20" y="562" text-anchor="start" font-size="11" fill="#202124">nursery</text>
+<text x="252" y="562" text-anchor="end" font-size="11" fill="#5f6368">12960</text>
+<text x="338" y="562" text-anchor="end" font-size="11" fill="#5f6368">91 (4)</text>
+<text x="432" y="562" text-anchor="end" font-size="11" fill="#cc7000">100 (0)</text>
+<circle cx="439" cy="558" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,554 h-72.11405445180276 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h72.11405445180276 z" fill="#cc7000"/>
+<text x="712" y="562" text-anchor="end" font-size="11" fill="#5f6368">-9</text>
+<text x="20" y="574" text-anchor="start" font-size="11" fill="#202124">kr.vs.kp</text>
+<text x="252" y="574" text-anchor="end" font-size="11" fill="#5f6368">3196</text>
+<text x="338" y="574" text-anchor="end" font-size="11" fill="#5f6368">90 (3)</text>
+<text x="432" y="574" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="570" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,566 h-72.76158940397352 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h72.76158940397352 z" fill="#cc7000"/>
+<text x="711" y="574" text-anchor="end" font-size="11" fill="#5f6368">-9</text>
+<text x="20" y="586" text-anchor="start" font-size="11" fill="#202124">sonar</text>
+<text x="252" y="586" text-anchor="end" font-size="11" fill="#5f6368">208</text>
+<text x="338" y="586" text-anchor="end" font-size="11" fill="#5f6368">74 (5)</text>
+<text x="432" y="586" text-anchor="end" font-size="11" fill="#cc7000">85 (7)</text>
+<circle cx="439" cy="582" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,578 h-85.71228844738778 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h85.71228844738778 z" fill="#cc7000"/>
+<text x="698" y="586" text-anchor="end" font-size="11" fill="#5f6368">-11</text>
+<text x="20" y="598" text-anchor="start" font-size="11" fill="#202124">pendigits</text>
+<text x="252" y="598" text-anchor="end" font-size="11" fill="#5f6368">10992</text>
+<text x="338" y="598" text-anchor="end" font-size="11" fill="#5f6368">88 (4)</text>
+<text x="432" y="598" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="594" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,590 h-89.5974981604121 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h89.5974981604121 z" fill="#cc7000"/>
+<text x="694" y="598" text-anchor="end" font-size="11" fill="#5f6368">-11</text>
+<text x="20" y="610" text-anchor="start" font-size="11" fill="#202124">autos</text>
+<text x="252" y="610" text-anchor="end" font-size="11" fill="#5f6368">205</text>
+<text x="338" y="610" text-anchor="end" font-size="11" fill="#5f6368">66 (4)</text>
+<text x="432" y="610" text-anchor="end" font-size="11" fill="#cc7000">79 (4)</text>
+<circle cx="439" cy="606" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,602 h-104.49080206033852 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h104.49080206033852 z" fill="#cc7000"/>
+<text x="679" y="610" text-anchor="end" font-size="11" fill="#5f6368">-13</text>
+<text x="20" y="622" text-anchor="start" font-size="11" fill="#202124">audiology</text>
+<text x="252" y="622" text-anchor="end" font-size="11" fill="#5f6368">226</text>
+<text x="338" y="622" text-anchor="end" font-size="11" fill="#5f6368">58 (7)</text>
+<text x="432" y="622" text-anchor="end" font-size="11" fill="#cc7000">71 (5)</text>
+<circle cx="439" cy="618" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,614 h-105.13833701250917 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h105.13833701250917 z" fill="#cc7000"/>
+<text x="679" y="622" text-anchor="end" font-size="11" fill="#5f6368">-13</text>
+<text x="20" y="634" text-anchor="start" font-size="11" fill="#202124">colic.orig</text>
+<text x="252" y="634" text-anchor="end" font-size="11" fill="#5f6368">368</text>
+<text x="338" y="634" text-anchor="end" font-size="11" fill="#5f6368">68 (5)</text>
+<text x="432" y="634" text-anchor="end" font-size="11" fill="#cc7000">83 (5)</text>
+<circle cx="439" cy="630" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,626 h-118.08903605592354 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h118.08903605592354 z" fill="#cc7000"/>
+<text x="666" y="634" text-anchor="end" font-size="11" fill="#5f6368">-15</text>
+<text x="20" y="646" text-anchor="start" font-size="11" fill="#202124">cylinder.bands</text>
+<text x="252" y="646" text-anchor="end" font-size="11" fill="#5f6368">540</text>
+<text x="338" y="646" text-anchor="end" font-size="11" fill="#5f6368">70 (6)</text>
+<text x="432" y="646" text-anchor="end" font-size="11" fill="#cc7000">85 (4)</text>
+<circle cx="439" cy="642" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,638 h-121.326710816777 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h121.326710816777 z" fill="#cc7000"/>
+<text x="662" y="646" text-anchor="end" font-size="11" fill="#5f6368">-15</text>
+<text x="20" y="658" text-anchor="start" font-size="11" fill="#202124">car</text>
+<text x="252" y="658" text-anchor="end" font-size="11" fill="#5f6368">1728</text>
+<text x="338" y="658" text-anchor="end" font-size="11" fill="#5f6368">84 (4)</text>
+<text x="432" y="658" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="654" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,650 h-123.26931567328916 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h123.26931567328916 z" fill="#cc7000"/>
+<text x="661" y="658" text-anchor="end" font-size="11" fill="#5f6368">-15</text>
+<text x="20" y="670" text-anchor="start" font-size="11" fill="#202124">mnist_1</text>
+<text x="252" y="670" text-anchor="end" font-size="11" fill="#5f6368">10000</text>
+<text x="338" y="670" text-anchor="end" font-size="11" fill="#5f6368">80 (5)</text>
+<text x="432" y="670" text-anchor="end" font-size="11" fill="#cc7000">96 (2)</text>
+<circle cx="439" cy="666" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,662 h-131.68727005150845 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h131.68727005150845 z" fill="#cc7000"/>
+<text x="652" y="670" text-anchor="end" font-size="11" fill="#5f6368">-16</text>
+<text x="20" y="682" text-anchor="start" font-size="11" fill="#202124">vehicle</text>
+<text x="252" y="682" text-anchor="end" font-size="11" fill="#5f6368">846</text>
+<text x="338" y="682" text-anchor="end" font-size="11" fill="#5f6368">59 (7)</text>
+<text x="432" y="682" text-anchor="end" font-size="11" fill="#cc7000">77 (5)</text>
+<circle cx="439" cy="678" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,674 h-145.93303899926423 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h145.93303899926423 z" fill="#cc7000"/>
+<text x="638" y="682" text-anchor="end" font-size="11" fill="#5f6368">-18</text>
+<text x="20" y="694" text-anchor="start" font-size="11" fill="#202124">letter</text>
+<text x="252" y="694" text-anchor="end" font-size="11" fill="#5f6368">20000</text>
+<text x="338" y="694" text-anchor="end" font-size="11" fill="#5f6368">74 (5)</text>
+<text x="432" y="694" text-anchor="end" font-size="11" fill="#cc7000">97 (2)</text>
+<circle cx="439" cy="690" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,686 h-183.4900662251656 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h183.4900662251656 z" fill="#cc7000"/>
+<text x="600" y="694" text-anchor="end" font-size="11" fill="#5f6368">-22</text>
+<text x="20" y="706" text-anchor="start" font-size="11" fill="#202124">tic-tac-toe</text>
+<text x="252" y="706" text-anchor="end" font-size="11" fill="#5f6368">958</text>
+<text x="338" y="706" text-anchor="end" font-size="11" fill="#5f6368">69 (4)</text>
+<text x="432" y="706" text-anchor="end" font-size="11" fill="#cc7000">99 (1)</text>
+<circle cx="439" cy="702" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,698 h-252.776306107432 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h252.776306107432 z" fill="#cc7000"/>
+<text x="531" y="706" text-anchor="end" font-size="11" fill="#5f6368">-31</text>
+<text x="20" y="718" text-anchor="start" font-size="11" fill="#202124">vowel</text>
+<text x="252" y="718" text-anchor="end" font-size="11" fill="#5f6368">990</text>
+<text x="338" y="718" text-anchor="end" font-size="11" fill="#5f6368">62 (8)</text>
+<text x="432" y="718" text-anchor="end" font-size="11" fill="#cc7000">96 (3)</text>
+<circle cx="439" cy="714" r="2.5" fill="#cc7000"/>
+<path d="M792.7858719646799,710 h-273.4974245768948 a3,3 0 0 0 -3,3 v1 a3,3 0 0 0 3,3 h273.4974245768948 z" fill="#cc7000"/>
+<text x="510" y="718" text-anchor="end" font-size="11" fill="#5f6368">-33</text>
+<line x1="792.7858719646799" y1="22" x2="792.7858719646799" y2="719" stroke="#9aa0a6" stroke-width="1"/>
+<line x1="20" y1="722" x2="880" y2="722" stroke="#e6e8e9" stroke-width="1"/>
+<text x="20" y="737" text-anchor="start" font-size="11" fill="#5f6368">mean, all 58</text>
+<text x="338" y="737" text-anchor="end" font-size="11" fill="#5f6368">80</text>
+<text x="432" y="737" text-anchor="end" font-size="11" fill="#5f6368">85</text>
+<text x="799" y="737" text-anchor="start" font-size="11" fill="#5f6368">-5</text>
+<text x="20" y="752" text-anchor="start" font-size="11" fill="#5f6368">seconds</text>
+<text x="338" y="752" text-anchor="end" font-size="11" fill="#1559b3">775</text>
+<text x="432" y="752" text-anchor="end" font-size="11" fill="#5f6368">2431</text>
+<text x="799" y="752" text-anchor="start" font-size="11" fill="#5f6368">3x faster</text>
 </svg>

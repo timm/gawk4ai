@@ -1,0 +1,34 @@
+# usage: oawk shuf.oawk [Seed=1 Era=64 N=0] file.csv
+# Shuffle the rows, deal them out in eras separated by a blank line, and
+# prefix each row with binsX: how many rows are still to come.
+BEGIN    { Seed=1          # srand seed, so a run is reproducible
+           Era=64          # rows per era; era 1 absorbs the remainder
+           N=0 }           # rows to deal out; 0 means "all of them"
+
+BEGIN    { FS="[ \t]*,[ \t]*"   # the raw file may pad its commas
+           OFS=","         # but what we emit never does
+           delete _ }      # every internal: _.hdr _.n _.a
+
+empty()  { next }
+!_.hdr++ { srand(Seed); print "binsX" OFS $0; next }
+         { _.a[++_.n] = $0 }
+END      { deal() }
+
+function deal(   n,nxt,r,i) {   # n,nxt,r,i are local: END owns no globals
+  n = N ? N : _.n
+  nxt = Era + _.n % Era         # era 1 eats the odd rows, so the last
+  while (n > 0) { shuffle()     # era is always exactly Era long
+    for(i=1; i<=_.n && n-- > 0; i++) {
+      print n OFS _.a[i]        # the countdown, then the row
+      if (++r == nxt && n) {    # a blank line SEPARATES eras; none
+        print ""; nxt += Era } } } }   # follows the last one
+
+function shuffle(   i,j,t) {
+  for(i=_.n; i>1; i--) {
+    j=int(rand()*i)+1
+    t=_.a[i]; _.a[i]=_.a[j]; _.a[j]=t } }
+
+function empty() {                     # a whole-line comment, or blank
+  if ($0 ~ /^[[:space:]]*#/) return 1
+  gsub(/^[[:space:]]+|[[:space:]]+$/,"")
+  $1=$1; return $0=="" }

@@ -1,11 +1,9 @@
 #!/usr/bin/env python3 -B
 # vim: set et sw=2 ts=2 sts=2 cc=75 :
-# clas.py: how good is the gawk classifier?  Runs `prep | bin | nb` on
-# 10 MOOT files x SEEDS shuffles, 50:50, and scores it against LightGBM
-# given the SAME shuffled rows and the same split.  Reports mean accuracy
-# and the wall clock of each side.  Writes the table body slide 2 shows.
-# Needs the MOOT data: cd bundle/gawk && make moot.
-# usage: python3 slides/clas.py   (or: make fig)
+# clas.py: RETIRED as a harness -- small.py replaced it, and the
+# `prep | bin | nb` pipeline it drove is gone.  Kept because small.py
+# imports same() and acc() from here; running it will fail.
+# See slides/small.py for the current experiment.
 import json, os, statistics as st, subprocess, sys
 import time, warnings
 import numpy as np

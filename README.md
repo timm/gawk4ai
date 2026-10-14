@@ -390,7 +390,7 @@ it yet. Gawk makes that visible, fast.
 and hash arrays. Nothing else. So you must hunt for the smallest data
 representation first. Once the representation is right, the algorithm often
 collapses into a few pattern-action rules. See `bundle/gawk/nb.awk`: the
-whole naive Bayes classifier is one nested count table and twenty lines.
+whole naive Bayes classifier is one nested count table and forty lines.
 
 **Programs are stream rules.** Pattern-action is the Unix mindset. Data flows
 past; code reacts. Tools compose through pipes, not APIs. Each script does
@@ -410,6 +410,84 @@ code. The ideas live in your head, not in the codebase.
 **Small code is auditable code.** You can check correctness by reading, not
 only by testing. This matters for science. A reviewer can verify the entire
 method. No one can verify "see our 50,000-line repo".
+
+## House rules
+
+The mindset says why. These say how. They were not designed; they were
+extracted from `bundle/gawk/shuf.awk` and `nb1.awk` after those two were
+cut from 14 globals to 9. Every refactoring step below was verified
+byte-identical across all 73 data files; the one deliberate change of
+behaviour was made separately, and measured.
+
+**Globals set in the first BEGIN are ambient.** `M`, `K`, `B`, `FS` are read
+wherever they are needed, never threaded through parameters. `post(nf,nh,p)`
+beats `post(nf,nh,m,p)`.
+
+**Everything else that is global, name like one.** Leading upper case for
+state that lives (`Rows`, `H`, `F`). A leading underscore for scratch that
+exists only between a rule and its helper (`_Buf`). Lower case means local,
+always.
+
+**Locals are the parameters after the gap.** `function like(h,b,   c,p,out)`.
+Forget one and it silently becomes a global; `gawk --lint` finds it, because
+"shadows global variable" means a real global exists.
+
+**Declare every array in BEGIN with `delete`.** It documents the globals in
+one block, and it dodges the worst gawk trap (below).
+
+**`_` is the loop variable for patterns.** `for(_=1; _<=NF; _++) head(_,$_)`.
+Reserved for rule level: if any function touched it, a callee would corrupt
+its caller's loop.
+
+**Fold parallel arrays into one keyed array.** `N[c]["mu"]` instead of
+`Mu[c]`, `Sd[c]`, `M2[c]`, `N[c]`. Use string literals — defining `mu="mu"`
+to write `N[c][mu]` creates a global per key and gives back everything the
+fold won.
+
+**Pass caches as array parameters.** awk passes arrays by reference, and an
+unsupplied trailing parameter is a fresh local array per call. So a cache
+costs nothing as a parameter and puts the dependency in the signature, where
+a global hides it.
+
+**Push functions toward the end and toward no state.** The line is *mutable
+model state*, not "any global" — the leaf functions read BEGIN constants and
+still belong below the divider. In `nb1.awk` the whole probability
+model is three small functions under `#-- these touch no model state`, two
+of them one-liners.
+
+**A stage may assume its upstream's format.** `nb1.awk` sets `FS=","` rather
+than `FS="[ \t]*,[ \t]*"` because `shuf.awk` rebuilt every record with
+`OFS=","` first. Two of the 73 data files really do pad their commas; by the
+time nb1 sees them, none do.
+
+**Delete dead knobs.** `T`, `R`, `Burn`, `Eras`, `Num` all looked load-bearing
+and none were. Grep for the caller before believing a parameter is used.
+
+### The traps
+
+Each of these cost an afternoon at least once.
+
+- `length(x)` on an untyped variable types it a **scalar**. The later `x[i]`
+  is then fatal. Same for `!x` as a guard. This is what `delete x` in BEGIN
+  prevents.
+- `$1=$1` rebuilds `$0` using **OFS**. Set OFS or your commas become spaces.
+- `||` short-circuits past assignment side effects. In
+  `!out || (v=like(h)) > best`, `like` is never called for the first class.
+- `print` cannot be an operand of `?:`.
+- `$0 = buf[i]` re-splits on FS exactly as `split(buf[i],f)` does, and is a
+  little faster — but know who owns `$0` after you return.
+
+### Two rules about changing it
+
+**Verify by byte-diff, not by reading.** This cuts against "small code is
+auditable code", and it is the lesson the refactor above actually taught:
+three changes that read as obviously equivalent were not. Diff the new
+version against the old across every data file before believing it.
+
+**Measure before trading clarity for speed.** Moving one cache from a global
+to a parameter cost 0%. Removing it cost 44%. Folding five arrays into one
+cost 0.3 seconds across all 73 files. Percentages on sub-second runs mislead;
+time the whole suite.
 
 ## Usage
 
@@ -444,10 +522,13 @@ Now read a real program. Here is the heart of `bundle/gawk/nb.awk`, a
 complete naive Bayes trainer:
 
 ```awk
-/^train,/ { train(f) }
-
-function train(f,   c) {
-  rows++; for (c=2; c<=NF; c++) if ($c != "?") f[$NF][c][$c]++ }
+function learn(buf,n,f,rows,   i,c) {
+  for(i in buf) {
+    $0 = buf[i]
+    rows++
+    n[$klass]++
+    for(c in x) if ($c != "?") f[$klass][c][$c]++ }
+  return rows }
 ```
 
 One rule, one function, one nested count table. Classification is just

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Small data, big data</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  body { --code: 11px; }
+  p.note { font-size: 15px; margin-top: 10px; max-width: 62ch; }
+  .legend { display: flex; gap: 22px; margin: 2px 0 8px;
+            font-size: 15px; color: #3c4043; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .dot.ink { background: #1559b3; }
+  .dot.pick { background: #cc7000; }
+</style>
+</head>
+<body>
+
+<h1>2. Naive Bayes wins small, loses big</h1>
+<p class="sub">shuf | bins | nb vs LightGBM: accuracy %, mean (sd) of 20
+shuffles; test = the last era (64 rows), both train on all the rest;
+&lowast; = statistically the same as the best, by cliff's delta and
+Kolmogorov&ndash;Smirnov</p>
+
+<div class="legend">
+  <span><i class="dot ink"></i> gawk ahead</span>
+  <span><i class="dot pick"></i> LightGBM ahead</span>
+</div>
+
+<!-- regenerate with: python3 slides/small.py -a   (-a -c to redraw) -->
+<div data-raw="slides/fig/nb-chart.svg"></div>
+
+<p class="note">Sorted by the gap &mdash; which sorts by size. Every one of
+gawk's 16 wins is under 800 rows; every loss past &minus;10 is over 200.
+That is the generative/discriminative crossover: counting wins while data
+is scarce, boosting wins once it is not. 58 data sets, 20 shuffles each;
+gawk took 775s, LightGBM 2431s.</p>
+
+</body>
+</html>

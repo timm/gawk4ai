@@ -2,50 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Incremental naive Bayes in gawk</title>
+<title>Streaming naive Bayes in gawk</title>
 <link rel="stylesheet" href="../style.css">
-<style> body { --code: 14px; } </style>
+<style> body { --code: 12px; } .stack > * + * { margin-top: 10px; } h2 { margin-bottom: 4px; } </style>
 </head>
 <body class="cols-2">
 
-<h1>Incremental naive Bayes in gawk</h1>
-<p class="sub">prep &rarr; bin &rarr; nb: classify each row, then learn from it (t=n: start guessing after row n; T=n: learn rows 1..n)</p>
+<h1>Streaming naive Bayes in gawk</h1>
+<p class="sub">shuf &rarr; nb1: shuf deals the rows out in eras, blank line between each; nb1 guesses with the last era&rsquo;s knowledge, then learns the backlog when the era closes (Era=64; Burn=n: start guessing after row n; T=n: learn rows 1..n)</p>
 
 <div class="grid">
   <section class="stack">
     <div>
-      <h2>nb.awk &mdash; reads the :bins rows prep and bin wrote</h2>
-      <pre class="awk" data-src="bundle/gawk/nb.awk"></pre>
+      <h2>nb1.awk &mdash; one pass: mu/sd by Welford, bins on the fly</h2>
+      <pre class="awk" data-src="bundle/gawk/nb1.awk"></pre>
+    </div>
+  </section>
+
+  <section class="stack">
+    <div>
+      <h2>$ shuf | nb1 | abcd &mdash; soybean, 19 classes, 576 guesses, 84% right</h2>
+      <!-- regenerate with: cat $C/soybean.csv | shuf.awk Seed=1 | nb1.awk | abcd.awk -->
+      <pre class="out">   n,  tn,  fn,  fp,  tp, acc, pre,  pf,  pd, class
+  11, 565,   0,   0,  11, 100, 100,   0, 100, cyst-nematode
+  15, 561,   0,   0,  15, 100, 100,   0, 100, purple-seed-stain
+  16, 551,   0,   9,  16,  98,  64,   1, 100, rhizoctonia-root-rot
+  35, 531,   0,  10,  35,  98,  77,   1, 100, brown-stem-rot
+  78, 451,   0,  47,  78,  91,  62,   9, 100, alternarialeaf-spot
+  40, 531,   1,   5,  39,  98,  88,   0,  97, anthracnose
+  12, 564,   1,   0,  11,  99, 100,   0,  91, diaporthe-pod-&amp;-stem-blight
+  19, 557,   2,   0,  17,  99, 100,   0,  89, diaporthe-stem-canker
+  76, 496,  11,   4,  65,  97,  94,   0,  85, phytophthora-rot
+  18, 558,   3,   0,  15,  99, 100,   0,  83, powdery-mildew
+  17, 559,   3,   0,  14,  99, 100,   0,  82, downy-mildew
+  77, 492,  14,   7,  63,  96,  90,   1,  81, brown-spot
+  20, 556,   5,   0,  15,  99, 100,   0,  75, charcoal-rot
+  14, 562,   4,   0,  10,  99, 100,   0,  71, 2-4-d-injury
+  69, 501,  21,   6,  48,  95,  88,   1,  69, frog-eye-leaf-spot
+  19, 557,   6,   0,  13,  98, 100,   0,  68, bacterial-pustule
+   8, 568,   3,   0,   5,  99, 100,   0,  62, herbicide-injury
+  15, 560,   7,   1,   8,  98,  88,   0,  53, phyllosticta-leaf-spot
+  17, 558,   9,   1,   8,  98,  88,   0,  47, bacterial-blight</pre>
     </div>
     <div>
       <h2>abcd.awk &mdash; per-class report</h2>
       <pre class="awk" data-src="bundle/gawk/abcd.awk"></pre>
     </div>
-  </section>
-
-  <section>
-    <h2>$ make nb &mdash; soybean, 19 classes, 673 guesses, 80% right</h2>
-    <!-- regenerate with: make nb -->
-    <pre class="out">   n,   a,   b,   c,   d, acc, pre,  pf,  pd, class
-  19, 638,   0,  16,  19,  97,  54,   2, 100, rhizoctonia-root-rot
-  43, 624,   3,   6,  40,  98,  86,   0,  93, anthracnose
-  44, 618,   3,  11,  41,  97,  78,   1,  93, brown-stem-rot
-  90, 534,   6,  49,  84,  91,  63,   8,  93, alternarialeaf-spot
-  14, 659,   1,   0,  13,  99, 100,   0,  92, cyst-nematode
-  15, 658,   2,   0,  13,  99, 100,   0,  86, diaporthe-pod-&amp;-stem-blight
-  20, 652,   3,   1,  17,  99,  94,   0,  85, diaporthe-stem-canker
-  19, 652,   3,   2,  16,  99,  88,   0,  84, charcoal-rot
-  19, 653,   3,   1,  16,  99,  94,   0,  84, bacterial-pustule
-  19, 654,   3,   0,  16,  99, 100,   0,  84, downy-mildew
-  92, 557,  20,  24,  72,  93,  75,   4,  78, brown-spot
-  86, 586,  20,   1,  66,  96,  98,   0,  76, phytophthora-rot
-   8, 665,   2,   0,   6,  99, 100,   0,  75, herbicide-injury
-  20, 653,   5,   0,  15,  99, 100,   0,  75, powdery-mildew
-  90, 567,  24,  16,  66,  94,  80,   2,  73, frog-eye-leaf-spot
-  20, 653,   6,   0,  14,  99, 100,   0,  70, purple-seed-stain
-  16, 657,   5,   0,  11,  99, 100,   0,  68, 2-4-d-injury
-  19, 653,   9,   1,  10,  98,  90,   0,  52, bacterial-blight
-  20, 650,  13,   3,   7,  97,  70,   0,  35, phyllosticta-leaf-spot</pre>
   </section>
 </div>
 

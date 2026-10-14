@@ -21,12 +21,12 @@ shuffled: gawk moot
 	@cat $C/weather.csv | $G shuffle.awk N=20
 
 nb: gawk moot      ## 0. naive Bayes
-	$G prep.awk Seed=$S $C/soybean.csv \
-	  | $G bin.awk | $G nb.awk | $G abcd.awk
+	$G shuf.awk Seed=$S $C/soybean.csv \
+	  | $G bins.awk | $G nb.awk | $G abcd.awk
 
-disc: gawk moot    ## 1. numeric x: prep bins them, then nb
-	$G prep.awk Seed=$S $C/diabetes.csv \
-	  | $G bin.awk | $G nb.awk | $G abcd.awk
+disc: gawk moot    ## 1. numeric x: bins buckets them, then nb
+	$G shuf.awk Seed=$S $C/diabetes.csv \
+	  | $G bins.awk | $G nb.awk | $G abcd.awk
 
 opt: gawk moot     ## 2. good configs: label 25, kNN guesses, check 5
 	$G split.awk Seed=$S N=25 $(MOOT)/optimize/config/SS-K.csv \
