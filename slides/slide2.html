@@ -42,11 +42,12 @@
       <div class="legend">
         <span><i class="dot ink"></i> gawk ahead</span>
         <span><i class="dot pick"></i> lgbm ahead</span>
-        <span>accuracy %, mean (sd) of 20 shuffles, 50:50 train:test, MOOT files under 500 rows</span>
+        <span>shuf|nb1 vs lgbm: accuracy %, mean (sd) of 20 shuffles; test = the last era (64 rows), both train on all the rest</span>
       </div>
       <div data-raw="slides/fig/nb-chart.svg"></div>
-      <p class="note">Chosen by size alone, under 500 rows &mdash; size predicts the gap
-        (r =&minus;0.56 on log rows). Over 1500 rows: &minus;8, gawk tying on 1 of 13.</p>
+      <p class="note">Chosen by size alone &mdash; size predicts the gap
+        (r =&minus;0.56 on log rows). Here gawk is 2 behind, best or tied on 15 of 27;
+        over 1500 rows the gap is &minus;8 and gawk ties on 1 of 13.</p>
     </div>
   </section>
 </div>

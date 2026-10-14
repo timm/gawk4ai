@@ -3,7 +3,7 @@ FNR==1   { for(c=1;c<=NF;c++) head(c,$c); next }
 /^$/     { if (b) era(); next }                  # blank line = era over
          { R++
            if (b && R == T+1) era()              # stop learning: flush
-           if (Eras && R > t) print $NF "\t" classify()
+           if (Eras && R > t) print classify() "\t" $NF
            if (R <= T) { welford(); buf[++b] = $0 } }
 
 function head(c,s) {
