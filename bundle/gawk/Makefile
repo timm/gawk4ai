@@ -17,6 +17,9 @@ gawk:   ## install gawk (mac, linux, windows)
 moot:   ## get the data
 	@test -d $(MOOT) || git clone --depth 1 https://github.com/timm/moot $(MOOT)
 
+shuffled: gawk moot
+	@cat $C/weather.csv | $G shuffle.awk N=20
+
 nb: gawk moot      ## 0. naive Bayes
 	$G prep.awk Seed=$S $C/soybean.csv \
 	  | $G bin.awk | $G nb.awk | $G abcd.awk

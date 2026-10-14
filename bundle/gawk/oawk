@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# oawk: objects + awk. Runs a .oawk file by turning .name into ["name"]
+# then handing it to gawk. A digit after the dot stays a number. (e.g. 3.14,
+# .5, "%.2f"). For fiile names use e.g. "fred.""c
+# usage: oawk prog.oawk [var=value ...] [file ...]   |   ... | oawk prog.oawk
+# vim: set et sw=2 ts=2 sts=2 cc=75 :
+prep() { gawk '
+  BEGIN { print "# oawk: 2 blank lines keep the error line numbers right\n" }
+        { print gensub(/\["\./, "[\"", "g",
+                   gensub(/\.[A-Za-z_][A-Za-z_0-9]*/, "[\"&\"]", "g")) }' "$1"; }
+
+gawk -f <(prep "$1") "${@:2}"

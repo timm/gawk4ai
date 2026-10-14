@@ -1,0 +1,11 @@
+# a dotted gawk program: objects are arrays, methods go through send()
+BEGIN { FS=","; num.add = "numAdd"; sym.add = "symAdd" }
+NR>1  { send(num, $2); send(sym, $NF) }
+END   { printf "PLAS: n=%d mu=%.1f sd=%.1f\n", num.n, num.mu, sd(num)
+        for (k in sym.seen) printf "%-18s %d\n", k, sym.seen[k] }
+
+function send(i, v,   f) { f = i.add; @f(i, v) }
+function numAdd(i, v) { i.n++; i.d = v - i.mu
+                        i.mu += i.d / i.n; i.m2 += i.d * (v - i.mu) }
+function symAdd(i, v) { i.n++; i.seen[v]++ }
+function sd(i) { return i.n > 1 ? sqrt(i.m2 / (i.n - 1)) : 0 }

@@ -1,5 +1,6 @@
 # usage: gawk -f prep.awk f | gawk -f bin.awk [Bins=10]
 # a :bins per :cells: x num -> percent, by mu,sd, z +-3. Bins divides 100
+# Plain=1 drops the : lines: just the header, then the binned rows.
 # vim: set et sw=2 ts=2 sts=2 cc=75 :
 BEGIN      { FS=OFS=","; Bins=10 }
 /^:x,/     { cols(X)  }               # 1 = numeric x, 0 = symbolic x

@@ -106,7 +106,7 @@ def trip(v, fmt, lo=False):   # two numbers, the better one bold
 #-- figure ------------------------------------------------------------------
 INK, PICK, GRID = "#1559b3", "#cc7000", "#e6e8e9"
 AXIS, MUTED, DARK = "#9aa0a6", "#5f6368", "#202124"
-W, RH, L, BAR = 900, 29, 300, 14      # width, row height, label gutter, bar
+W, RH, L, BAR = 900, 24, 340, 12      # width, row height, label gutter, bar
 
 
 def bar(x, y, w, h, fill):            # 4px rounded on the data end only
@@ -137,18 +137,19 @@ def chart(out, d, secs):
        f'xmlns="http://www.w3.org/2000/svg" role="img" '
        f'aria-label="accuracy of gawk versus LightGBM, by dataset">',
        txt(20, 20, "data", size=13, fill=MUTED),
-       txt(170, 20, "gawk", "end", 13, MUTED),
-       txt(265, 20, "lgbm", "end", 13, MUTED),
+       txt(215, 20, "gawk", "end", 13, MUTED),
+       txt(310, 20, "lgbm", "end", 13, MUTED),
        txt(sx(0), 20, "delta", "middle", 13, MUTED)]
   for i, (name, sd, a, b, gap, win, *_) in enumerate(out):
     y = 40 + i * RH
-    o += [txt(20, y + 11, name, size=15),
-          txt(170, y + 11, f"{a:.0f} ({sd[0]:.0f})", "end", 15,
+    o += [txt(20, y + 11, name[:19], size=15),
+          txt(215, y + 11, f"{a:.0f} ({sd[0]:.0f})", "end", 15,
               INK if win[0] else MUTED),
-          txt(265, y + 11, f"{b:.0f} ({sd[1]:.0f})", "end", 15,
-              PICK if win[1] else MUTED),
-          f'<circle cx="{182 if win[0] else 277}" cy="{y+6}" r="3.5" '
-          f'fill="{INK if win[0] else PICK}"/>',
+          txt(310, y + 11, f"{b:.0f} ({sd[1]:.0f})", "end", 15,
+              PICK if win[1] else MUTED)]
+    for on, x, hue in ((win[0], 227, INK), (win[1], 322, PICK)):
+      if on: o += [f'<circle cx="{x}" cy="{y+6}" r="3.5" fill="{hue}"/>']
+    o += [
           bar(sx(0), y, sx(gap) - sx(0), BAR, INK if gap > 0 else PICK),
           txt(sx(gap) + (8 if gap > 0 else -8), y + 11, f"{gap:+.0f}",
               "start" if gap > 0 else "end", 14, MUTED)]
@@ -158,13 +159,14 @@ def chart(out, d, secs):
         f'<line x1="20" y1="{y}" x2="{W-20}" y2="{y}" stroke="{GRID}" '
         f'stroke-width="1"/>',
         txt(20, y + 22, "mean", size=15, fill=MUTED),
-        txt(170, y + 22, f"{d[0]:.0f}", "end", 15, MUTED),
-        txt(265, y + 22, f"{d[1]:.0f}", "end", 15, MUTED),
+        txt(215, y + 22, f"{d[0]:.0f}", "end", 15, MUTED),
+        txt(310, y + 22, f"{d[1]:.0f}", "end", 15, MUTED),
         txt(sx(0) + 8, y + 22, f"{d[0]-d[1]:+.0f}", size=14, fill=MUTED),
         txt(20, y + 44, "seconds", size=15, fill=MUTED),
-        txt(170, y + 44, f"{secs[0]:.0f}", "end", 15, INK),
-        txt(265, y + 44, f"{secs[1]:.0f}", "end", 15, MUTED),
-        txt(sx(0) + 8, y + 44, "9x faster", size=14, fill=MUTED),
+        txt(215, y + 44, f"{secs[0]:.0f}", "end", 15, INK),
+        txt(310, y + 44, f"{secs[1]:.0f}", "end", 15, MUTED),
+        txt(sx(0) + 8, y + 44, f"{secs[1]/secs[0]:.0f}x faster", size=14,
+            fill=MUTED),
         "</svg>"]
   open(f"{FIG}/nb-chart.svg", "w").write("\n".join(o) + "\n")
 
