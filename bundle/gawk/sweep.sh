@@ -26,10 +26,9 @@ for f in $files; do
   for s in $seeds; do
     $G shuf.awk Seed="$s" "$f" > /tmp/sweep.$$ 
     printf "%-22s %s shuf %s\n" "$b" "$s" "$(md5 -q /tmp/sweep.$$)"
-    printf "%-22s %s nb1  %s\n" "$b" "$s" \
-      "$($G nb1.awk /tmp/sweep.$$ | md5 -q)"
-    printf "%-22s %s bins %s\n" "$b" "$s" \
-      "$($G bins.awk /tmp/sweep.$$ | $G nb.awk | md5 -q)"
+    $G bins.awk /tmp/sweep.$$ | $G nb.awk > /tmp/sweep2.$$
+    test -s /tmp/sweep2.$$ || echo "EMPTY OUTPUT: $b seed $s" >&2
+    printf "%-22s %s nb   %s\n" "$b" "$s" "$(md5 -q /tmp/sweep2.$$)"
   done
 done
-rm -f /tmp/sweep.$$
+rm -f /tmp/sweep.$$ /tmp/sweep2.$$

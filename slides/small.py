@@ -1,8 +1,8 @@
 #!/usr/bin/env python3 -B
 # vim: set et sw=2 ts=2 sts=2 cc=75 :
-# small.py: how good is `shuf | bins | nb` on small data?  Runs it on every
-# MOOT classify file with 128..499 rows x 20 shuffles.  The last era
-# (64 rows) is the test set, so both sides train on `all - era[-1]`.
+# small.py: how good is `shuf | bins | nb`?  Runs it on every MOOT
+# classify file of 128+ rows x 20 shuffles.  The last 25% of each
+# shuffle is the test set, so both sides train on the same first 75%.
 # LightGBM gets the SAME shuffled rows and the SAME split.
 # usage: python3 slides/small.py        (-c: redraw from the cache)
 import json, os, statistics as st, subprocess, sys, time, warnings
@@ -16,30 +16,35 @@ GAWK = os.path.expanduser("~/gh/gawk4ai/bundle/gawk")
 MOOT = os.path.expanduser("~/tmp/moot/classify")
 FIG  = HERE + "/fig"
 TMP  = HERE + "/../../tmp/small"; os.makedirs(TMP, exist_ok=True)
-SEEDS, ERA, MIN = range(1, 21), 64, 128
+SEEDS, TEST, MINTEST = range(1, 21), .25, 5   # test = the last TEST
 MAX  = 10**9 if "-a" in sys.argv else 500   # -a: every scorable file, not
 TAG  = "nball" if "-a" in sys.argv else "nb27"  # just the small ones
-BAD = "trains weather shuttle.landing.control sponge spectf.train " \
-      "spectf.test wine spectrometer".split()   # goal is numeric,
+
+def scorable(path):                    # a file we can actually classify
+  L = [l.strip().split(",") for l in open(path) if l.strip()]
+  hdr, rows = L[0], L[1:]
+  goal = [c for c, h in enumerate(hdr) if h.rstrip().endswith("!")]
+  if not goal: return 0                # nothing marked as the goal
+  k = len(set(r[goal[-1]] for r in rows if len(r) > goal[-1]))
+  if k > len(rows) / 4: return 0       # near-unique goal: a regression set
+  if int(len(rows) * TEST) < MINTEST: return 0   # too few rows to test on
+  return len(rows)
 
 FILES = []
 for f in sorted(os.listdir(MOOT)):
   if not f.endswith(".csv"): continue
-  name = f[:-4]
-  if name in BAD: continue
-  n = sum(1 for _ in open(f"{MOOT}/{f}")) - 1
-  if MIN <= n < MAX: FILES += [(name, n)]
+  n = scorable(f"{MOOT}/{f}")
+  if n and n < MAX: FILES += [(f[:-4], n)]
 
 def gawk(src, seed):
   t0 = time.perf_counter()
-  sh = (f"gawk -f {GAWK}/shuf.awk Seed={seed} Era={ERA} {src} > {TMP}/s; "
+  sh = (f"gawk -f {GAWK}/shuf.awk Seed={seed} {src} > {TMP}/s; "
         f"gawk -f {GAWK}/bins.awk {TMP}/s | "
         f"gawk -f {GAWK}/nb.awk > {TMP}/pairs")
   subprocess.run(["bash","-c",sh], check=True, capture_output=True)
   secs = time.perf_counter() - t0
   n = sum(1 for l in open(TMP+"/s") if l.strip()) - 1
   f = [l.rstrip("\n").split("\t") for l in open(TMP+"/pairs") if l.strip()]
-  f = f[-ERA:]
   return [x[0] for x in f], [x[1] for x in f], n, secs
 
 def isnum(vals):                       # sniff by value, not by column name
@@ -71,7 +76,7 @@ def lgbm(n):
   f = np.array(cols, dtype=float).T
   ky = {v:i for i,v in enumerate(sorted(set(y)))}
   back = {i:v for v,i in ky.items()}
-  T = n - ERA
+  T = n - int(n * TEST)          # same split the gawk side used
   m = lgb.LGBMClassifier(verbose=-1, n_estimators=100)
   m.fit(f[:T], [ky[v] for v in y[:T]], categorical_feature=cat or "auto")
   return ([back[int(p)] for p in m.predict(f[T:])], y[T:],
@@ -99,10 +104,20 @@ def txt(x, y, s, anchor="start", size=12, fill=DARK):
           f'font-size="{size}" fill="{fill}">{s}</text>')
 
 
+def thin(out, n=50):                  # the ends in full, the middle sampled
+  """First 10, last 10, and n-20 evenly spaced from what lies between.
+  The chart would not fit 67 rows; the numbers below it still count all."""
+  if len(out) <= n: return out
+  mid, k = out[10:-10], n - 20
+  step = (len(mid) - 1) / (k - 1)
+  keep = sorted({round(i * step) for i in range(k)})
+  return out[:10] + [mid[i] for i in keep] + out[-10:]
+
 def chart(out, rows, d, secs):
   """One diverging bar per file: gawk minus lgbm, sorted.  Blue = gawk
   ahead, orange = lgbm ahead.  Every row also prints both means with sd
   in brackets and dots the winner, so identity is never colour alone."""
+  all_n, out = len(out), thin(out)
   lo = min(min(r[4] for r in out), 0) - 1
   hi = max(max(r[4] for r in out), 0) + 1
   span, h = W - AX - 70, RH * (len(out) + 1) + 54
@@ -133,7 +148,7 @@ def chart(out, rows, d, secs):
         f'stroke="{AXIS}" stroke-width="1"/>',
         f'<line x1="20" y1="{y}" x2="{W-20}" y2="{y}" stroke="{GRID}" '
         f'stroke-width="1"/>',
-        txt(20, y + 15, f"mean, all {len(out)}", size=11, fill=MUTED),
+        txt(20, y + 15, f"mean, all {all_n}", size=11, fill=MUTED),
         txt(GX, y + 15, f"{d[0]:.0f}", "end", 11, MUTED),
         txt(LX, y + 15, f"{d[1]:.0f}", "end", 11, MUTED),
         txt(sx(0) + 6, y + 15, f"{d[0]-d[1]:+.0f}", size=11, fill=MUTED),
@@ -175,7 +190,7 @@ def report(raw, secs, rows):
                      else f"<td>{v:.0f}</td>" for v in secs)
            + "<td></td></tr>"]
   open(f"{FIG}/nb-rows.html", "w").write("\n".join(body) + "\n")
-  row = ('<td>Small data<small>accuracy</small></td>'
+  row = (f'<td>Accuracy<small>{len(out)} files</small></td>'
          '<td style="text-align:left" class="cmp">shuf|bins|nb / lgbm</td>'
          f'<td class="trip">{trip(d, ".0f")}</td>'
          f'<td class="trip">{trip(best, "d")}</td>'
@@ -200,7 +215,7 @@ def main():
     for seed in SEEDS:
       got, want, n, s1 = gawk(f"{MOOT}/{name}.csv", seed)
       g2, w2, s2 = lgbm(n)
-      assert len(want) == len(w2) == ERA
+      assert len(want) == len(w2) == int(n * TEST)
       runs[0] += [acc(got, want)]; runs[1] += [acc(g2, w2)]
       secs[0] += s1; secs[1] += s2
     raw[name] = runs; rows[name] = N

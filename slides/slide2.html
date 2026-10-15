@@ -2,29 +2,65 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>shuf, bins, nb1b</title>
+<title>shuf, bins</title>
 <link rel="stylesheet" href="../style.css">
-<style> body { --code: 11px; } h2 { margin-bottom: 4px; } </style>
+<style> body { --code: 11px; } h2 { margin-bottom: 4px; }
+        .stack > * + * { margin-top: 12px; }
+        pre.out { font-size: 11px; } p.note { font-size: 14px; } </style>
 </head>
-<body class="cols-3">
+<body class="cols-2">
 
-<h1>1. The whole classifier: three scripts, 105 lines</h1>
-<p class="sub">shuf deals the rows out in eras (blank line between, and a
-binsX countdown); bins turns numeric cells into one of B buckets, using mu
-and sd frozen at the end of each era; nb1b just counts</p>
+<h1>1. Shuffle, then bin: the whole protocol is one blank line</h1>
+<p class="sub">shuf shuffles the rows and prints ONE blank line inside, with
+the training rows before it and the held-out last 25% after.  That line is the
+only protocol: bins takes mu and sd from the rows before it, so nothing the
+held-out rows contain can reach the stats that bin them.  No tag column, no
+counter, no second pass.</p>
 
 <div class="grid">
-  <section>
-    <h2>shuf.awk &mdash; shuffle, cut into eras</h2>
-    <pre class="awk" data-src="bundle/gawk/shuf.awk"></pre>
+  <section class="stack">
+    <div>
+      <h2>shuf.awk &mdash; shuffle, split, mark the seam</h2>
+      <pre class="awk" data-src="bundle/gawk/shuf.awk"></pre>
+    </div>
+    <div>
+      <h2>$ shuf.awk Seed=1 diabetes.csv</h2>
+      <pre class="out">PREG,PLAS,PRES,SKIN,INSU,MASS,PEDI,AGE,class!
+0,117,66,31,188,30.8,0.493,22,tested_negative
+7,160,54,32,175,30.5,0.588,39,tested_positive
+7,102,74,40,105,37.2,0.204,45,tested_negative
+      :          :          :
+7,129,68,49,125,38.5,0.439,43,tested_positive
+6,105,80,28,0,32.5,0.878,26,tested_negative
+2,100,68,25,71,38.5,0.324,26,tested_negative
+                                    &larr; the seam
+2,121,70,32,95,39.1,0.886,23,tested_negative
+12,106,80,0,0,23.6,0.137,44,tested_negative</pre>
+    </div>
   </section>
-  <section>
-    <h2>bins.awk &mdash; numeric cell &rarr; bucket</h2>
-    <pre class="awk" data-src="bundle/gawk/bins.awk"></pre>
-  </section>
-  <section>
-    <h2>nb.awk &mdash; naive Bayes, pure counting</h2>
-    <pre class="awk" data-src="bundle/gawk/nb.awk"></pre>
+
+  <section class="stack">
+    <div>
+      <h2>bins.awk &mdash; numeric cell &rarr; bucket</h2>
+      <pre class="awk" data-src="bundle/gawk/bins.awk"></pre>
+    </div>
+    <div>
+      <h2>$ shuf.awk Seed=1 diabetes.csv | bins.awk</h2>
+      <pre class="out">PREG,PLAS,PRES,SKIN,INSU,MASS,PEDI,AGE,class!
+1,4,4,7,8,4,5,1,tested_negative
+8,8,2,7,7,4,6,7,tested_positive
+8,2,5,8,5,7,2,8,tested_negative
+      :          :          :
+8,6,4,9,6,7,4,8,tested_positive
+7,3,7,6,2,5,8,2,tested_negative
+2,2,4,6,4,7,3,2,tested_negative
+                                    &larr; still there
+2,5,5,7,5,8,8,1,tested_negative
+9,3,7,0,2,1,1,8,tested_negative</pre>
+      <p class="note">Same rows, same order, same seam &mdash; only the numbers
+      moved, each to one of B=10 buckets. The seam survives the pipe, so nb
+      downstream needs no protocol of its own.</p>
+    </div>
   </section>
 </div>
 

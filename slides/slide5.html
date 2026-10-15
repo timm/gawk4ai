@@ -17,7 +17,7 @@
 <body>
 
 <h1>4. Tiny tools vs. state of the art</h1>
-<p class="sub">10 MOOT files per idea (4 for text) &middot; 50:50 train:test &middot; lgbm = LightGBM defaults &middot; svm = tf-idf + LinearSVC</p>
+<p class="sub">every MOOT file the protocol can score (4 for text) &middot; lgbm = LightGBM defaults &middot; svm = tf-idf + LinearSVC</p>
 
 <table class="big">
   <thead><tr>
@@ -39,7 +39,7 @@
 
 <p class="note">Tied = mean within 0.35&middot;sd of the best (sd of all results for that file). Bold = best in each row.<br>
 Seconds = wall clock for the whole command, process start-up included, on both sides.<br>
-Few labels is 10 MOOT files &times; 50 shuffles (slides/weak.py); numeric Xs is 10 files &times; 20 (slides/clas.py); rare classes is 4 files &times; 20.</p>
+Few labels is 10 MOOT files &times; 50 shuffles (slides/weak.py); accuracy is 67 files &times; 20, testing on the last 25% (slides/small.py); rare classes is 4 files &times; 20.</p>
 
 </body>
 </html>
