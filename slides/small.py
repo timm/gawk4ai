@@ -190,12 +190,6 @@ def report(raw, secs, rows):
                      else f"<td>{v:.0f}</td>" for v in secs)
            + "<td></td></tr>"]
   open(f"{FIG}/nb-rows.html", "w").write("\n".join(body) + "\n")
-  row = (f'<td>Accuracy<small>{len(out)} files</small></td>'
-         '<td style="text-align:left" class="cmp">shuf|bins|nb / lgbm</td>'
-         f'<td class="trip">{trip(d, ".0f")}</td>'
-         f'<td class="trip">{trip(best, "d")}</td>'
-         f'<td class="trip">{trip(secs, ".0f", lo=True)}</td>')
-  open(f"{FIG}/nb5-row.html", "w").write(row + "\n")
   chart(out, rows, d, secs)
   print(f"\n{'data':28}{'rows':>6}{'gawk':>9}{'lgbm':>10}{'delta':>8}")
   for n, sd, a, b, gap, w in out:
@@ -205,7 +199,7 @@ def report(raw, secs, rows):
         f"       {d[1]:3.0f}    {d[0]-d[1]:+8.0f}")
   print(f"{'seconds':28}{'':6}   {secs[0]:3.0f}       {secs[1]:3.0f}")
   print(f"\nwins (best or tied): gawk {best[0]}, lgbm {best[1]}")
-  print("-> slides/fig/ nb-rows.html nb5-row.html nb-chart.svg")
+  print("-> slides/fig/ nb-rows.html nb-chart.svg")
 
 
 def main():

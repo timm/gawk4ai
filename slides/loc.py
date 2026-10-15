@@ -11,8 +11,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PORTS = f"{ROOT}/bundle/ports"
 
-TOOLS = "abcd nb shuffle disc some knnr ydist rank tfidf twcnb".split()
-LANGS = [("gawk", f"{ROOT}/bundle/gawk", "{}.awk", None),
+TOOLS = "shuffle disc nb abcd rank tfidf twcnb some".split()
+# a row is a job, not a file: gawk renamed two and fused three, so say
+# which files each language spends on each job when it is not just <job>
+AS = {"gawk": {"shuffle": ["shuf"], "disc": ["bins"]},
+      "port": {"rank": ["ydist", "knnr", "rank"]}}
+LANGS = [("gawk", f"{ROOT}/bundle/gawk", "{}.awk", "dist.awk"),
          ("lua", f"{PORTS}/lua", "{}.lua", "lib.lua"),
          ("js", f"{PORTS}/js", "{}.js", "lib.js"),
          ("python", f"{PORTS}/py", "{}.py", "lib.py"),
@@ -40,7 +44,10 @@ def cell(v): return f'<td>{"&mdash;" if v is None else v}</td>'
 def main():
   n = {lang: {} for lang, *_ in LANGS}
   for lang, d, pat, lib in LANGS:
-    for t in TOOLS: n[lang][t] = loc(f"{d}/{pat.format(t)}")
+    for t in TOOLS:
+      fs = AS.get(lang if lang == "gawk" else "port", {}).get(t, [t])
+      got = [loc(f"{d}/{pat.format(f)}") for f in fs]
+      n[lang][t] = sum(v for v in got if v) if any(got) else None
     n[lang]["lib"] = loc(f"{d}/{lib}") if lib else None
   out = [f"<tr><td>{t}</td>" + "".join(cell(n[l][t]) for l, *_ in LANGS)
          + "</tr>" for t in TOOLS]

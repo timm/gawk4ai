@@ -14,8 +14,8 @@
 </head>
 <body>
 
-<h1>7. How long is all this in other languages?</h1>
-<p class="sub">The 10 tools in this deck, same command-line contract, same outputs. Lines = non-blank, non-comment; a python docstring is that language&rsquo;s usage comment, so it does not count either. Standard libraries only (except the last column).</p>
+<h1>6. How long is all this in other languages?</h1>
+<p class="sub">The 8 jobs in this deck, same command-line contract, same outputs. Lines = non-blank, non-comment; a python docstring is that language&rsquo;s usage comment, so it does not count either. Standard libraries only (except the last column).</p>
 
 <table>
   <thead><tr>
@@ -26,7 +26,7 @@
 
 <p class="note">Ports written separately and diffed against the gawk outputs: lua, js, python, rust match on every test (except 2 exact ties in twcnb).<br>
 python+sklearn borrows CategoricalNB, KNeighborsRegressor, DecisionTreeRegressor, ComplementNB(norm=True): close results, not identical.<br>
-gawk needs no shared lib: argument parsing, field splitting, two-pass reads and hashes of hashes come with the language.</p>
+Rows are jobs, not files: the ports split ranking into ydist + knnr + rank, where gawk does it in one. gawk's lib is dist.awk; the language already gives it argument parsing, field splitting, two-pass reads and hashes of hashes.</p>
 
 </body>
 </html>

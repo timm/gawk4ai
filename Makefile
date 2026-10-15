@@ -13,8 +13,12 @@ slides: ## slides/*.html -> slide*.png (1920x1080)
 	    --virtual-time-budget=2000 --screenshot=$$n.png "file://$(PWD)/$$f" \
 	    2> /dev/null; echo "$$n.png"; done
 
-.PHONY: help slides fig
+.PHONY: help slides fig big
 
-fig:    ## rerun the experiments and the line counts (needs MOOT data)
-	@python3 slides/weak.py
+fig:    ## rerun the slide experiments and line counts (needs MOOT data)
+	@python3 slides/rank.py
+	@python3 slides/curve.py
 	@python3 slides/loc.py
+
+big:    ## the long one: 67 files x 20 shuffles, gawk vs LightGBM
+	@python3 slides/small.py -a

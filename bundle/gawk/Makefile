@@ -20,17 +20,17 @@ moot:   ## get the data
 shuffled: gawk moot
 	@cat $C/weather.csv | $G shuffle.awk N=20
 
-nb: gawk moot      ## 0. naive Bayes
+nb: gawk moot      ## 1. naive Bayes
 	$G shuf.awk Seed=$S $C/soybean.csv \
 	  | $G bins.awk | $G nb.awk | $G abcd.awk
 
-disc: gawk moot    ## 1. numeric x: bins buckets them, then nb
+disc: gawk moot    ## 2. numeric x: bins buckets them, then nb
 	$G shuf.awk Seed=$S $C/diabetes.csv \
 	  | $G bins.awk | $G nb.awk | $G abcd.awk
 
-opt: gawk moot     ## 2. good configs: label 25, check 5, see how good
+opt: gawk moot     ## 3. good configs: label 32, check 5, see how good
 	$G shuf.awk Seed=$S $(MOOT)/optimize/config/SS-K.csv \
-	  | $G rank.awk K=25 C=5
+	  | $G rank.awk K=32 C=5
 
 OPT = misc/auto93 process/nasa93dem process/coc1000 process/pom3a \
       process/pom3d process/xomo_flight config/SS-A config/SS-D \
@@ -42,7 +42,7 @@ RK ?= 32
 RC ?= 5
 R  ?= 20
 
-ranks: gawk moot   ## 2b. rank over $(OPT), $(R) shuffles, median+quartiles
+ranks: gawk moot   ## 3b. rank over $(OPT), $(R) shuffles, median+quartiles
 	@printf "%-26s %6s %4s %4s %4s\n" data rows med q25 q75
 	@for f in $(OPT); do \
 	  for s in $$(seq 1 $(R)); do \
