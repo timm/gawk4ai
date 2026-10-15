@@ -4,12 +4,17 @@
 <meta charset="utf-8">
 <title>Rare classes? TWCNB on text</title>
 <link rel="stylesheet" href="../style.css">
-<style> body { --code: 13px; } </style>
+<style> body { --code: 13px; } h2 { margin-bottom: 4px; }
+        pre.cmd { font-size: 12px; } p.note { font-size: 14px; } </style>
 </head>
 <body class="cols-2">
 
-<h1>3. Rare classes? TWCNB on text</h1>
+<h1>4. Rare classes? TWCNB on text</h1>
 <p class="sub">Rennie et al., ICML&rsquo;03, Table 4: tf-idf picks 64 words; complement NB with normalized weights</p>
+
+<pre class="cmd">$ make twcnb
+  tsv.awk Kitchenham.csv | split.awk Seed=1 &gt; $t
+  tfidf.awk $t $t | twcnb.awk T=$(grep -c '^train,' $t) | abcd.awk</pre>
 
 <div class="grid">
   <section class="stack">
@@ -31,6 +36,11 @@
       </table>
       <p class="note">bold = best, or within 0.35&middot;sd of best</p>
       <p class="note">~1% &ldquo;yes&rdquo;. svm = tf-idf (all words) + LinearSVC, class-balanced.</p>
+      <p class="note">The one pipeline still on the old protocol: split.awk
+      tags rows train/test instead of shuf.awk printing one blank line, and
+      tfidf needs two passes (so the stream has to land in a file, and twcnb
+      has to be told where train ends). Moving it to the blank line would
+      delete all of that.</p>
     </div>
   </section>
 

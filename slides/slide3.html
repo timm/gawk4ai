@@ -5,62 +5,56 @@
 <title>Few labels? Rank with a weak learner</title>
 <link rel="stylesheet" href="../style.css">
 <style>
-  body { --code: 13px; }
-  table { font-size: 16px; }
-  caption { font-size: 17px; padding-bottom: 7px; }
-  td { padding: 2px 9px; }
-  td:first-child { font-size: 15px; }
-  tr.mean td:first-child { font-size: 16px; }
-  .stack > * + * { margin-top: 15px; }
-  p.note { font-size: 15px; }
-  .lede { font-size: 20px; margin: 0 0 14px; line-height: 1.35; }
+  body { --code: 10px; }
+  h2 { margin-bottom: 4px; }
+  table { font-size: 14px; }
+  caption { font-size: 15px; padding-bottom: 6px; }
+  td { padding: 1px 7px; }
+  td:first-child { font-size: 13px; }
+  .stack > * + * { margin-top: 10px; }
+  p.note { font-size: 13px; }
+  .lede { font-size: 16px; margin: 0; line-height: 1.35; }
   .lede b { font-weight: 700; }
 </style>
 </head>
-<body class="cols-2">
+<body class="cols-3">
 
-<h1>2. Few labels? Rank with a weak learner</h1>
-<p class="sub">Nair et al. (arXiv 1702.05701): label a few rows, let kNN rank the rest, check the top 5, report where the best of them really ranks</p>
+<h1>3. Few labels? Rank with a weak learner</h1>
+<p class="sub">shuf | rank &mdash; team A labels 32 rows once; team B reuses
+that work and labels only 5 more to pick a winner</p>
 
 <div class="grid">
-  <section class="stack">
-    <div>
-      <p class="lede"><b>x is free, y is dear.</b> One label = one build, one benchmark,
-        one expert hour &mdash; so count labels, not CPU. And never ask the model for a
-        number: ask it for a <b>shortlist</b>. Optimization needs the tail, not the function,
-        so a guesser too weak to predict is still strong enough to rank.</p>
-    </div>
-    <div>
-      <h2>ydist.awk (pre: many goals &rarr; one distance to heaven)</h2>
-      <pre class="awk" data-src="bundle/gawk/ydist.awk"></pre>
-      <p class="note">pipeline: split Seed=s N=budget &rarr; ydist &rarr; knnr &rarr; rank C=5<br>
-        Cost = N + 5 labels: N to train the guess, 5 to check its shortlist. Nothing else is ever labelled.</p>
-    </div>
+  <section>
+    <h2>dist.awk &mdash; the stateless half: conventions, distances, spans</h2>
+    <pre class="awk" data-src="bundle/gawk/dist.awk"></pre>
   </section>
-
+  <section>
+    <h2>rank.awk &mdash; label K, shortlist C, report the truth</h2>
+    <pre class="awk" data-src="bundle/gawk/rank.awk"></pre>
+  </section>
   <section class="stack">
-    <div>
-      <h2>rank.awk (post: true rank of the best of the top C)</h2>
-      <pre class="awk" data-src="bundle/gawk/rank.awk"></pre>
-    </div>
-    <div>
-      <table>
-        <caption>rank of best checked row, % (lower = better; 1 = top 1%): 10 MOOT files &times; 50 shuffles, 50:50 train:test</caption>
-        <thead><tr>
-          <th>data</th><th>err %</th><th>&rho;</th>
-          <th>rand</th><th>25</th><th>50</th><th>100</th>
-        </tr></thead>
-        <tbody data-raw="slides/fig/rank-rows.html"></tbody>
-      </table>
-      <p class="note">
-        <b>err %</b>, <b>&rho;</b>: how much the knn@25 guess knows &mdash; 100&middot;MAE / MAE(predict the mean of the 25 labels),
-        and Spearman &rho; of guessed vs actual over every test row. A good predictor would score 0 and 1.00.<br>
-        <b>rand</b> = no learner: label 5 rows at random, keep the best. <b>25 / 50 / 100</b> = labels spent before checking 5.<br>
-        bold = lowest, or within 0.35&middot;sd of it (sd over every run for that file).
-      </p>
-      <p class="note">Read the gap between <b>err %</b> and the budget columns: the guess is bad at values and
-        mediocre at order, yet its top-5 lands in the best few percent &mdash; and 25 labels buys nearly all of it.</p>
-    </div>
+    <p class="lede"><b>x is free, y is dear.</b> One label = one build, one
+      benchmark, one expert hour &mdash; so count labels, not CPU. And never ask
+      the model for a number: ask it for a <b>shortlist</b>. Optimization needs
+      the tail, not the function, so a guesser too weak to predict is still
+      strong enough to rank.</p>
+    <table>
+      <caption>where the pick really sits among the held-out rows, %
+        (0 = we found the best one): 20 MOOT files &times; 20 shuffles,
+        K=32 then C=5</caption>
+      <thead><tr>
+        <th>data</th><th>rows</th><th>med</th><th>q25&ndash;q75</th><th>rand 5</th>
+      </tr></thead>
+      <tbody data-raw="slides/fig/rank-rows.html"></tbody>
+    </table>
+    <p class="note">
+      <b>med</b> = median of <code>shuf | rank K=32 C=5</code>.
+      <b>rand 5</b> = team B alone, no model: label 5 held-out rows at random,
+      keep the best (<code>rank Rnd=5</code>, scored by the same code).
+      Regenerate with <code>python3 slides/rank.py</code>.</p>
+    <p class="note">37 labels, and the median pick lands in the top 2% &mdash;
+    better than the no-model baseline on 19 of 20 files. The 32 are paid once
+    and shared; after that, five labels buy a near-best answer.</p>
   </section>
 </div>
 

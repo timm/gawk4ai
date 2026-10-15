@@ -1,7 +1,9 @@
-# usage: ... | gawk -f abcd.awk   (lines: guessed actual)
+# usage: ... | gawk -f abcd.awk [Every=0]   (lines: guessed actual)
 # per class: n, the cells tn fn fp tp, then acc, precision, pf, recall.
-BEGIN { FS="\t" }            # classes can hold spaces
-NF==2 { n++; got[$1]++; want[$2]++; hit[$1] += $1==$2 }
+# Every>0 also prints "rows acc" as it goes, to see where that settles.
+BEGIN { FS="\t"; Every=0 }   # classes can hold spaces
+NF==2 { n++; got[$1]++; want[$2]++; hit[$1] += $1==$2; ok += $1==$2
+        if (Every && n % Every == 0) print n, int(100*ok/n) }
 END   { report(n, got, want, hit) }
 
 function report(n,got,want,hit,   x,tn,fn,fp,tp) {

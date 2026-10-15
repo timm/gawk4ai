@@ -53,8 +53,10 @@ ranks: gawk moot   ## 2b. rank over $(OPT), $(R) shuffles, median+quartiles
 	      n, r, a[int(k/2)], a[int(k*0.25)+1], a[int(k*0.75)]}'; \
 	done | sort -k3 -n
 
-twcnb: gawk moot   ## 3. rare classes: tf-idf + TWCNB on text
-	$G tsv.awk $(MOOT)/text_mining/reading/raw/Kitchenham.csv \
-	  | $G split.awk Seed=$S | $G tfidf.awk | $G twcnb.awk | $G abcd.awk
+twcnb: gawk moot   ## 4. rare classes: tf-idf + TWCNB on text
+	@t=$$(mktemp); $G tsv.awk $(MOOT)/text_mining/reading/raw/Kitchenham.csv \
+	  | $G split.awk Seed=$S > $$t;  \
+	 $G tfidf.awk $$t $$t \
+	  | $G twcnb.awk T=$$(grep -c '^train,' $$t) | $G abcd.awk; rm -f $$t
 
 all: nb disc opt twcnb  ## run everything
