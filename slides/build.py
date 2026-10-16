@@ -30,6 +30,13 @@ MAKE = re.compile(r"(?P<doc>##[^\n]*)|(?P<com>#[^\n]*)"
                   r"|(?P<call>\$\$?[({][^(){}\n]*[)}]|\$\$[A-Za-z_]\w*)"
                   r"|(?P<kw>\b(?:case|esac|in|then|else|fi|do|done)\b)"
                   r"|(?P<num>\b\d+(?:\.\d+)?\b)", re.M)
+PY = re.compile(r"(?P<com>#[^\n]*)"
+                r"|(?P<str>\"\"\"(?:[^\"]|\"(?!\"\"))*\"\"\""
+                r"|\"(?:[^\"\\\n]|\\.)*\"|'(?:[^'\\\n]|\\.)*')"
+                r"|(?P<kw>\b(?:def|return|for|in|if|elif|else|while|not|and"
+                r"|or|lambda|import|from|with|as|yield|break|continue|None"
+                r"|True|False|class|global|try|except|is|pass)\b)"
+                r"|(?P<num>\b\d+(?:\.\d+)?(?:[eE][-+]?\d+)?\b)")
 PRE = re.compile(r"<pre([^>]*)></pre>")
 RAW = re.compile(r'<(\w+)([^>]*\bdata-raw="([^"]*)"[^>]*)></\1>')
 OUTB = re.compile(r'(<pre class="out">)(.*?)(</pre>)', re.S)
@@ -58,7 +65,7 @@ def cols(s):  # colour a comma-separated report, one colour per column
   return "\n".join(out)
 
 PAINT = dict(awk=lambda s: paint(AWK, s), make=lambda s: paint(MAKE, s),
-             out=cols, txt=esc)
+             py=lambda s: paint(PY, s), out=cols, txt=esc)
 
 def src(a):  # the data-src file, sliced by an optional data-lines="a-b"
   s = open(f"{ROOT}/{a['data-src']}").read().rstrip("\n")

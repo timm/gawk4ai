@@ -2,60 +2,68 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Rare classes? TWCNB on text</title>
+<title>Rare classes? Complement NB on text</title>
 <link rel="stylesheet" href="../style.css">
-<style> body { --code: 11px; } h2 { margin-bottom: 4px; }
-        table { font-size: 15px; } caption { font-size: 15px; padding-bottom: 6px; }
-        td { padding: 1px 8px; }
-        pre.out { font-size: 11px; } p.note { font-size: 13px; }
+<style> body { --code: 10px; } h2 { margin-bottom: 4px; }
+        table { font-size: 14px; } caption { font-size: 15px; padding-bottom: 6px; }
+        td { padding: 1px 7px; } td:first-child { font-size: 13px; }
+        pre.out { font-size: 10px; } p.note { font-size: 13px; }
         .stack > * + * { margin-top: 10px; } </style>
 </head>
 <body class="cols-3">
 
-<h1>4. Rare classes? TWCNB on text</h1>
-<p class="sub">Rennie et al., ICML&rsquo;03, Table 4: tf-idf picks 64 words;
-complement NB with normalized weights.  ~1% of these papers are a &ldquo;yes&rdquo;,
-and plain naive Bayes just answers &ldquo;no&rdquo; to everything.</p>
+<h1>4. Rare classes? Complement NB on text</h1>
+<p class="sub">About 1% of these papers are a &ldquo;yes&rdquo;, so accuracy is
+useless &mdash; answer &ldquo;no&rdquo; to everything and score 99%.  Count recall
+instead.  Ten labels get most of the way; spending more can make it worse.</p>
 
 <div class="grid">
   <section>
-    <h2>tfidf.awk &mdash; the 64 words that carry the most</h2>
-    <pre class="awk" data-src="bundle/gawk/tfidf.awk"></pre>
+    <h2>min.py &mdash; tf-idf picks the 64 words that carry most</h2>
+    <pre class="py" data-src="../../gits/timm/ezr/min.py" data-lines="176-190"></pre>
+    <p class="note">No stemmer, a 16-word stop list, and the abstract only
+    &mdash; the same choices the gawk version makes.</p>
   </section>
   <section>
-    <h2>twcnb.awk &mdash; replaces nb.awk</h2>
-    <pre class="awk" data-src="bundle/gawk/twcnb.awk"></pre>
+    <h2>min.py &mdash; complement naive bayes</h2>
+    <pre class="py" data-src="../../gits/timm/ezr/min.py" data-lines="192-210"></pre>
+    <p class="note">Score a class by what it is <i>not</i> like.  With 45 yes
+    against 1659 no, the complement of &ldquo;yes&rdquo; is estimated from
+    plenty of data; the class itself is not.</p>
   </section>
   <section class="stack">
     <div>
-      <h2>$ make twcnb</h2>
-      <pre class="out">tsv.awk Kitchenham.csv | split.awk Seed=1 &gt; $t
-tfidf.awk $t $t | twcnb.awk T=$(grep -c '^train,' $t) | abcd.awk
-
-   n,  tn,  fn,  fp,  tp, acc, pre,  pf,  pd, class
-  21, 550,   3, 281,  18,  66,   6,  33,  85, yes
- 831,  18, 281,   3, 550,  66,  99,  14,  66, no</pre>
+      <h2>$ min.py -File Kitchenham.csv -Warm 10 --cnb</h2>
+      <pre class="out">Kitchenham.csv: 1704 papers, 45 yes (2.6%), top 64 words;
+label from half, score on the other half
+ labelled   pd
+       10   85
+       12   86
+       14   81
+       16   77
+       18   74
+       20   75</pre>
     </div>
     <div>
       <table>
-        <caption>macro pd % (mean recall of yes, no): 4 MOOT files
-          &times; 20 shuffles, 50:50 train:test</caption>
-        <thead><tr><th>data</th><th>nb</th><th>twcnb</th><th>svm</th></tr></thead>
+        <caption>recall of the held-out &ldquo;yes&rdquo; papers, %: 20
+          repeats, median.  Label from one half, score on the other.</caption>
+        <thead><tr><th>data</th><th>yes</th><th>10</th><th>20</th><th>30</th><th>50</th></tr></thead>
         <tbody>
-          <tr><td>Hall</td>      <td>61.8</td><td class="b">82.3</td><td class="b">83.9</td></tr>
-          <tr><td>Kitchenham</td><td>50.2</td><td class="b">80.8</td><td>55.1</td></tr>
-          <tr><td>Radjenovic</td><td>51.4</td><td class="b">82.1</td><td>62.6</td></tr>
-          <tr><td>Wahono</td>    <td>50.9</td><td class="b">81.8</td><td>58.3</td></tr>
-          <tr class="mean"><td>mean</td><td>53.6</td><td>81.7</td><td>65.0</td></tr>
+          <tr><td>Hall</td>      <td>104</td><td class="b">93</td><td>85</td><td>87</td><td>89</td></tr>
+          <tr><td>Kitchenham</td><td>45</td> <td class="b">85</td><td>75</td><td>67</td><td>55</td></tr>
+          <tr><td>Radjenovic</td><td>48</td> <td class="b">93</td><td>73</td><td>68</td><td>70</td></tr>
+          <tr><td>Wahono</td>    <td>62</td> <td>89</td><td class="b">90</td><td>86</td><td>82</td></tr>
         </tbody>
       </table>
-      <p class="note">bold = best, or within 0.35&middot;sd of best.
-      svm = tf-idf (all words) + LinearSVC, class-balanced.</p>
-      <p class="note">The one pipeline still on the old protocol: split.awk
-      tags rows train/test instead of shuf.awk printing one blank line, and
-      tfidf needs two passes &mdash; so the stream has to land in a file, and
-      twcnb has to be told where train ends. Moving it to the blank line
-      would delete all of that.</p>
+      <p class="note">Columns are labels spent.  The warm start is ten rows,
+      half of them forced to be yes; after that the learner asks for whatever
+      looks most like a yes.</p>
+      <p class="note">Which is the problem.  Labelling the likeliest yes first
+      starves the &ldquo;no&rdquo; class, and complement NB needs that side to
+      be well estimated &mdash; so on Kitchenham and Radjenovic the curve falls
+      as the budget grows.  A fixed held-out half rules out the easy
+      explanation: this is the method, not the measurement.</p>
     </div>
   </section>
 </div>
