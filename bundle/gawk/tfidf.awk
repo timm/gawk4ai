@@ -7,8 +7,9 @@ FNR==1  { if (NR > 1) top(); next }
 NR==FNR { count(); next }
         { print row() }
 
-function words(a,   n,i,w) {
-  n = split(tolower($1), w, /[^a-z]+/)
+function words(a,   n,i,w,s) {
+  s = $1; sub(/^(train|test|header),/, "", s)  # split.awk's tag is not
+  n = split(tolower(s), w, /[^a-z]+/)          # text: do not index it
   for (i=1; i<=n; i++)
     if (length(w[i]) > 3 && w[i] !~ STOP) a[w[i]]++ }
 
